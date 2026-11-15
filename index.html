@@ -1,0 +1,1033 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Hamza Elgoudany</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;600&family=Amiri:wght@400;700&display=swap">
+<style>
+/* Layout: a home "tableau de bord" (slate band + menu of rooms), each room opens as its own page via #hash.
+   Light working sheets for content, the slate band returns for hero, CalTrack showcase and contact. */
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --ink:#141C28; --muted:#566275; --line:#D8DEE7;
+  --accent:#0B7A58; --accent-ink:#FFFFFF; --accent-soft:#DDF0E8; --signal:#A8690F;
+  --band:#1A2332; --band-2:#222D40; --band-fg:#EEF2F7; --band-muted:#A3B2C5; --band-line:#34425A; --band-accent:#62D6A9;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --arabic:"IBM Plex Sans Arabic","Segoe UI",Tahoma,sans-serif;
+  --quote-ar:"Amiri","Traditional Arabic",serif;
+  --r:14px; --wrap:1140px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F151E; --surface:#171F2C; --ink:#E7ECF3; --muted:#97A5B8; --line:#2A3547;
+  --accent:#52CB9F; --accent-ink:#0C1A15; --accent-soft:#16332B; --signal:#E0A645;
+  --band:#141C29; --band-2:#1C2636; --band-fg:#EEF2F7; --band-muted:#A3B2C5; --band-line:#2F3C52; --band-accent:#62D6A9; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F151E; --surface:#171F2C; --ink:#E7ECF3; --muted:#97A5B8; --line:#2A3547;
+  --accent:#52CB9F; --accent-ink:#0C1A15; --accent-soft:#16332B; --signal:#E0A645;
+  --band:#141C29; --band-2:#1C2636; --band-fg:#EEF2F7; --band-muted:#A3B2C5; --band-line:#2F3C52; --band-accent:#62D6A9; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:20;background:var(--band)}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-0.015em}
+p{margin:0} ul{margin:0;padding:0;list-style:none} figure{margin:0}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.band :focus-visible,.nav :focus-visible,.dark :focus-visible{outline-color:var(--band-accent)}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+img{display:block}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;background:var(--band);color:var(--band-fg);border-bottom:1px solid var(--band-line)}
+.nav .wrap{display:flex;align-items:center;gap:16px;min-height:58px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:17px;text-decoration:none;white-space:nowrap}
+.brand i{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--band-accent);color:#0C1A15;font-style:normal;font-size:13px;font-weight:800}
+.links{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.links::-webkit-scrollbar{display:none}
+.links a{font-size:14px;text-decoration:none;color:var(--band-muted);padding:7px 11px;border-radius:999px;white-space:nowrap;transition:color .15s,background .15s}
+.links a:hover{color:var(--band-fg)}
+.links a[aria-current="page"]{color:var(--band-fg);background:var(--band-2)}
+.lang{display:flex;border:1px solid var(--band-line);border-radius:999px;padding:3px;gap:2px;flex:none}
+.lang button{font-family:var(--mono);font-size:12px;letter-spacing:.06em;padding:5px 10px;border-radius:999px;color:var(--band-muted)}
+.lang button[aria-pressed="true"]{background:var(--band-fg);color:var(--band)}
+.menu-btn{display:none;align-items:center;gap:8px;font-size:14px;color:var(--band-fg);border:1px solid var(--band-line);border-radius:999px;padding:6px 12px;margin-left:auto}
+@media (max-width:980px){.links{display:none}.menu-btn{display:inline-flex}}
+@media (max-width:480px){.brand span{display:none}.nav .wrap{gap:10px}}
+
+/* home band */
+.band{background:var(--band);color:var(--band-fg);position:relative;overflow:hidden}
+.band::after{content:"";position:absolute;inset:0;background-image:radial-gradient(var(--band-line) 1px,transparent 1.2px);background-size:26px 26px;opacity:.5;pointer-events:none;-webkit-mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent);mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent)}
+.hero{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:48px;align-items:center;padding-block:60px 40px}
+.eyebrow{color:var(--band-accent);display:flex;flex-wrap:wrap;gap:6px 14px}
+.eyebrow b{font-weight:500;color:var(--band-muted)}
+.hero h1{font-size:clamp(34px,5.4vw,62px);line-height:1.04;font-weight:700;margin-top:18px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--band-accent)}
+.lede{color:var(--band-muted);font-size:17px;max-width:60ch;margin-top:20px}
+.lede strong{color:var(--band-fg);font-weight:500}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;transition:transform .15s,border-color .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--band-accent);color:#0C1A15}
+.btn.ghost{border:1px solid var(--band-line);color:var(--band-fg)}
+.btn.line{border:1px solid var(--line);color:var(--ink)}
+.portrait{position:relative;width:min(240px,48vw);aspect-ratio:1;max-width:100%}
+.portrait img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:5px solid var(--band-2)}
+.portrait::before{content:"";position:absolute;inset:-14px;border-radius:50%;border:1px dashed var(--band-line)}
+.portrait span{position:absolute;right:-6px;bottom:14px;background:var(--band-2);border:1px solid var(--band-line);border-radius:999px;padding:6px 12px;font-size:12.5px;display:flex;gap:7px;align-items:center;white-space:nowrap}
+.portrait span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--band-accent)}
+@media (max-width:760px){.hero{grid-template-columns:minmax(0,1fr);gap:28px;padding-block:40px 28px}.portrait{order:-1;width:132px}.portrait span{right:auto;left:104px;bottom:8px}}
+.stats{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--band-line)}
+.stats{position:relative}
+.stat{text-align:left;color:inherit;padding:22px 18px 22px 0;display:grid;align-content:start;gap:0;transition:background .15s}
+.stat+.stat{padding-left:18px;border-left:1px solid var(--band-line)}
+.stat:hover .more,.stat[aria-expanded="true"] .more{color:var(--band-accent)}
+.stat .more{font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--band-muted);margin-top:10px;display:inline-flex;gap:5px;align-items:center;opacity:.8}
+.stat[aria-expanded="true"] .more svg{transform:rotate(180deg)}
+.bubble.up::before{top:auto;bottom:-7px}
+.band .bubble{background:var(--band-2);border-color:var(--band-line)}
+.band .bubble::before{background:var(--band-2)}
+.stlist{display:grid;gap:0;border-top:1px solid var(--band-line)}
+.stlist li{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:12px;padding:7px 0;border-bottom:1px solid var(--band-line);font-size:13.5px}
+.stlist li:last-child{border-bottom:0}
+.stats .stlist b{font-family:var(--body);font-weight:600;font-size:13.5px;line-height:1.4;display:block}
+.stats .bubble h4{font-size:17px}
+.stlist span{color:var(--band-muted)}
+.stats b{display:block;font-family:var(--display);font-weight:700;font-size:clamp(28px,3.6vw,42px);line-height:1;font-variant-numeric:tabular-nums}
+.stats b small{font-size:.5em;color:var(--band-accent);margin-left:2px}
+.stats span{display:block;color:var(--band-muted);font-size:13.5px;margin-top:8px;line-height:1.4}
+@media (max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat:nth-child(3){padding-left:0;border-left:0}.stat:nth-child(n+3){border-top:1px solid var(--band-line)}}
+
+/* home menu */
+.rooms{padding-block:56px 72px}
+.rooms-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.rooms-head h2{font-size:clamp(26px,3.2vw,36px)}
+.rooms-head p{color:var(--muted);max-width:52ch}
+.grid-rooms{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px}
+.room{grid-column:span 4;position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;min-height:200px;padding:20px;border-radius:18px;border:1px solid var(--line);background:var(--surface);text-decoration:none;overflow:hidden;transition:transform .2s,border-color .2s,box-shadow .2s}
+.room:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 14px 30px -18px rgba(10,30,50,.35)}
+.room .num{position:absolute;top:18px;left:20px;color:var(--muted)}
+.room .go{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);transition:background .2s,color .2s,border-color .2s}
+.room:hover .go{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.room h3{font-size:22px;line-height:1.15}
+.room p{color:var(--muted);font-size:14.5px;line-height:1.45}
+.room.wide{grid-column:span 8}
+.room.img{color:#fff;border:0;min-height:260px}
+.room.img::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,14,22,.05) 25%,rgba(8,14,22,.82));z-index:1}
+.room.img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.room.img:hover img{transform:scale(1.04)}
+.room.img h3,.room.img p,.room.img blockquote{position:relative;z-index:2}.room.img .num,.room.img .go{z-index:2}.room.img .num{background:rgba(8,14,22,.6);padding:3px 8px;border-radius:6px;top:14px;left:16px}
+.room.img p,.room.img .num{color:rgba(255,255,255,.82)}
+.room.img .go{border-color:rgba(255,255,255,.45)}
+.room.dark{background:var(--band);border-color:var(--band-line);color:var(--band-fg)}
+.room.dark p,.room.dark .num{color:var(--band-muted)}
+.room.dark .go{border-color:var(--band-line)}
+.room.dark:hover .go{background:var(--band-accent);color:#0C1A15;border-color:var(--band-accent)}
+.room.quote-room{background:var(--accent-soft);border-color:transparent}
+.room.quote-room blockquote{margin:28px 0 0;font-family:var(--quote-ar);font-size:24px;line-height:1.5;direction:rtl;text-align:right;color:var(--ink)}
+.bricks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:36px}
+.bricks button{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;text-align:left;padding:20px;border-radius:18px;border:1.5px solid var(--line);background:var(--surface);transition:border-color .15s,background .15s,color .15s}
+.bricks button:hover{border-color:var(--accent)}
+.bricks button[aria-selected="true"]{background:var(--band);color:var(--band-fg);border-color:var(--band)}
+.bricks .bn{font-family:var(--display);font-weight:800;font-size:34px;line-height:1;color:var(--accent)}
+.bricks button[aria-selected="true"] .bn{color:var(--band-accent)}
+.bricks b{display:block;font-family:var(--display);font-size:20px;line-height:1.2}
+.bricks span.s{display:block;font-size:14px;color:var(--muted);margin-top:4px}
+.bricks button[aria-selected="true"] span.s{color:var(--band-muted)}
+.bricks .tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border-radius:6px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.bricks button[aria-selected="true"] .tag{border-color:var(--band-line);color:var(--band-muted)}
+.brick-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:start;margin-bottom:28px;max-width:80ch}
+.brick-head .bn{font-family:var(--display);font-weight:800;font-size:48px;line-height:.9;color:var(--line)}
+.brick-head .mono{color:var(--accent)}
+.brick-head h3{font-size:clamp(24px,3vw,32px);line-height:1.15;margin-top:6px}
+.brick-head p:last-child{color:var(--muted);margin-top:8px}
+@media (max-width:700px){.bricks{grid-template-columns:minmax(0,1fr)}.bricks .tag{display:none}.brick-head .bn{font-size:36px}}
+.skwrap{position:relative}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tile{display:grid;justify-items:start;gap:14px;padding:20px 18px;border-radius:18px;border:1px solid var(--line);background:var(--surface);text-align:left;transition:transform .18s,border-color .18s,box-shadow .18s;min-height:150px;align-content:space-between}
+.tile:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 14px 28px -20px rgba(10,30,50,.4)}
+.tile[aria-expanded="true"]{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.tile .ill{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);transition:transform .2s}
+.tile:hover .ill{transform:rotate(-4deg) scale(1.05)}
+.tile.soft .ill{background:color-mix(in srgb,var(--signal) 16%,transparent);color:var(--signal)}
+.tile b{font-family:var(--display);font-size:17px;line-height:1.2;font-weight:600}
+.tile small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--muted);margin-top:4px;text-transform:uppercase}
+.bubble{position:absolute;z-index:5;width:min(360px,calc(100% - 8px));border:1px solid var(--band-line);background:var(--band);color:var(--band-fg);border-radius:16px;padding:18px;box-shadow:0 24px 50px -20px rgba(0,0,0,.55);display:grid;gap:10px}
+.bubble::before{content:"";position:absolute;top:-7px;left:var(--ax,40px);width:14px;height:14px;background:var(--band);transform:rotate(45deg);border-radius:2px}
+.bubble h4{font-size:18px;padding-right:30px}
+.bubble p{color:var(--band-muted);font-size:14.5px;line-height:1.5}
+.bubble .x{position:absolute;top:12px;right:12px;width:28px;height:28px;border-radius:50%;border:1px solid var(--band-line);display:grid;place-items:center;color:var(--band-fg)}
+.bubble .go-row{display:flex;flex-wrap:wrap;gap:8px;padding-top:10px;border-top:1px solid var(--band-line)}
+.bubble .go-row a{display:inline-flex;align-items:center;gap:8px;padding:7px 11px 7px 7px;border-radius:12px;background:var(--band-2);border:1px solid var(--band-line);text-decoration:none;font-size:13.5px;transition:border-color .15s}
+.bubble .go-row a:hover{border-color:var(--band-accent)}
+.bubble .go-row a i{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:var(--band-accent);color:#0C1A15;font-style:normal;flex:none}
+#tiles-soft{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:900px){.tiles,#tiles-soft{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:600px){.tiles,#tiles-soft{grid-template-columns:repeat(2,minmax(0,1fr))}.tile{min-height:130px;padding:16px}.tile .ill{width:46px;height:46px}
+ .bubble{position:fixed;left:max(12px,env(safe-area-inset-left,0px))!important;right:max(12px,env(safe-area-inset-right,0px));top:auto!important;bottom:calc(12px + env(safe-area-inset-bottom,0px));width:auto}
+ .bubble::before{display:none}}
+.mission.flash{animation:flash 2.4s ease}
+@keyframes flash{0%,30%{background:var(--accent-soft);border-color:var(--accent)}100%{background:transparent}}
+.room.full{grid-column:span 12;min-height:150px}
+.group-label{display:flex;align-items:center;gap:14px;margin:0 0 14px;color:var(--muted)}
+.group-label::after{content:"";flex:1;height:1px;background:var(--line)}
+.group-label b{font-family:var(--display);font-size:20px;color:var(--ink);font-weight:700;letter-spacing:-0.01em}
+.group-gap{height:40px}
+.room.beyond{background:linear-gradient(160deg,var(--accent-soft),var(--surface) 70%)}
+.sec-title{display:grid;gap:8px;margin:72px 0 26px;max-width:72ch}
+.sec-title .mono{color:var(--accent)}
+.sec-title h3{font-size:clamp(24px,3vw,32px);line-height:1.15}
+.sec-title p{color:var(--muted)}
+.ba{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.ba>div{border-radius:18px;padding:24px;display:grid;gap:16px;align-content:start}
+.ba .before{background:var(--surface);border:1px solid var(--line)}
+.ba .after{background:var(--band);color:var(--band-fg);border:1px solid var(--band-line)}
+.ba h4{font-size:19px}
+.ba .mono{color:var(--muted)}
+.ba .after .mono{color:var(--band-accent)}
+.steps-row{display:grid;gap:8px}
+.steps-row li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;align-items:start}
+.steps-row li i{font-style:normal;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-size:12px;border:1.5px solid var(--line);color:var(--muted)}
+.ba .after .steps-row li i{border-color:var(--band-line);color:var(--band-accent)}
+.ba .after .steps-row li.hl i{background:var(--band-accent);border-color:var(--band-accent);color:#0C1A15}
+.steps-row b{display:block;font-weight:600}
+.steps-row span{font-size:14.5px;color:var(--muted)}
+.ba .after .steps-row span{color:var(--band-muted)}
+.ba .out{border-top:1px solid var(--line);padding-top:12px;font-size:14.5px;color:var(--muted)}
+.ba .after .out{border-color:var(--band-line);color:var(--band-fg)}
+.gains{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+.gains div{border-top:2px solid var(--accent);padding-top:14px;display:grid;gap:6px}
+.gains h4{font-size:17px}
+.gains p{color:var(--muted);font-size:15px}
+.learned{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.learned span.l{font-size:14px;color:var(--muted);margin-right:4px}
+.learned b{font-weight:500;font-size:14px;padding:7px 13px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+.pullquote{margin-top:28px;padding:22px 24px;border-left:3px solid var(--accent);background:var(--surface);border-radius:0 14px 14px 0;font-family:var(--display);font-size:clamp(18px,2.2vw,22px);line-height:1.4;max-width:70ch}
+@media (max-width:860px){.ba{grid-template-columns:minmax(0,1fr)}.gains{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:900px){.room,.room.wide{grid-column:span 6}}
+@media (max-width:600px){.room,.room.wide{grid-column:span 12}.room{min-height:170px}.room.img{min-height:220px}}
+
+/* pages */
+.page{padding-block:44px 80px}
+.crumb{display:flex;align-items:center;gap:10px;margin-bottom:26px;flex-wrap:wrap}
+.crumb a{font-size:14px;color:var(--muted);text-decoration:none;display:inline-flex;gap:6px;align-items:center;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.crumb a:hover{color:var(--ink);border-color:var(--accent)}
+.crumb span{color:var(--muted)}
+.head{display:grid;gap:10px;margin-bottom:34px;max-width:72ch}
+.head .mono{color:var(--accent)}
+.head h2{font-size:clamp(30px,4vw,46px);line-height:1.08;font-weight:700}
+.head p{color:var(--muted);font-size:17px}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:64px;border-top:1px solid var(--line);padding-top:24px}
+.pager a{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:var(--r);text-decoration:none;background:var(--surface);transition:border-color .15s}
+.pager a:hover{border-color:var(--accent)}
+.pager a span{color:var(--muted);font-size:13px}
+.pager a b{font-family:var(--display);font-size:18px}
+.pager a.next{text-align:right}
+.pager a[hidden]{display:none}
+
+/* method */
+.flowline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));position:relative;margin-bottom:28px}
+.flowline::before{content:"";position:absolute;left:12.5%;right:12.5%;top:17px;height:2px;background:var(--line)}
+.flowline::after{content:"";position:absolute;left:12.5%;top:14px;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 20%,transparent);animation:run 5.5s cubic-bezier(.6,0,.4,1) infinite}
+@keyframes run{0%{left:12.5%}22%,28%{left:37.5%}47%,53%{left:62.5%}72%,100%{left:87.5%}}
+.flowline button{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.flowline .node{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--bg);border:2px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--muted);transition:all .15s}
+.flowline button[aria-selected="true"] .node{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.flowline .name{font-family:var(--display);font-weight:600;font-size:clamp(14px,1.9vw,18px)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:28px;display:grid;gap:16px}
+.panel h3{font-size:24px;line-height:1.2}
+.panel .what{color:var(--muted);max-width:62ch}
+.proof{border-top:1px solid var(--line);padding-top:16px;display:grid;gap:8px}
+.proof .mono{color:var(--accent)}
+.proof p{max-width:68ch}
+.proof .where{color:var(--muted);font-size:14px}
+
+/* timeline */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.chip{font-size:14px;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);transition:all .15s}
+.chip:hover{border-color:var(--accent);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.job{display:grid;grid-template-columns:190px minmax(0,1fr);gap:28px;padding-block:26px;border-top:1px solid var(--line);transition:opacity .2s}
+.job.dim{opacity:.28}
+.job .when{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding-top:5px;line-height:1.5}
+.job .when b{display:block;color:var(--accent);font-weight:500}
+.job h3{font-size:22px;line-height:1.2}
+.job .org{color:var(--muted);margin-top:4px}
+.job .body{display:grid;gap:14px;min-width:0}
+.mission{border-left:2px solid var(--line);padding-left:18px;display:grid;gap:10px;transition:opacity .2s,border-color .2s}
+.mission.dim{opacity:.28}.mission.hit{border-color:var(--accent)}
+.mission h4{font-size:17px;font-weight:600;line-height:1.3}
+.mission h4 span{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:400;margin-left:8px;white-space:nowrap}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-size:12.5px;padding:3px 9px;border-radius:6px;background:var(--bg);border:1px solid var(--line);color:var(--muted)}
+.pts{display:grid;gap:8px}
+.pts li{position:relative;padding-left:18px;max-width:76ch}
+.pts li::before{content:"";position:absolute;left:0;top:.68em;width:7px;height:2px;background:var(--accent)}
+.pts strong{font-weight:600}
+@media (max-width:760px){.job{grid-template-columns:minmax(0,1fr);gap:8px}.job .when b{display:inline;margin-right:8px}.flowline .name{font-size:13px}.panel{padding:20px}}
+
+/* AI case */
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
+.grid10{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;max-width:440px}
+.uc{aspect-ratio:1;border-radius:12px;border:2px solid var(--line);display:grid;place-items:center;font-family:var(--mono);font-size:13px;color:var(--muted);transition:transform .15s,border-color .15s;max-width:100%}
+.uc.done{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.uc.named{box-shadow:inset 0 0 0 3px var(--surface)}
+.uc:hover,.uc[aria-pressed="true"]{transform:translateY(-3px);border-color:var(--ink)}
+.caption{margin-top:16px;min-height:76px;border-left:2px solid var(--accent);padding-left:14px;max-width:440px}
+.caption b{display:block;font-family:var(--display);font-size:17px}
+.caption span{color:var(--muted);font-size:15px}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:14px;font-size:13.5px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:6px;vertical-align:-1px;border:2px solid var(--line)}
+.legend i.d{background:var(--accent);border-color:var(--accent)}
+.rolebox{margin:0 0 30px;padding:18px 20px;border-radius:14px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);display:grid;gap:6px;max-width:80ch}
+.rolebox .mono{color:var(--accent)}
+.ftag{font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:5px;margin-left:6px;vertical-align:2px;background:var(--accent-soft);color:var(--accent)}
+.ftag.e{background:color-mix(in srgb,var(--signal) 15%,transparent);color:var(--signal)}
+.facts div{display:grid;grid-template-columns:118px minmax(0,1fr);gap:16px;padding-block:16px;border-top:1px solid var(--line);align-items:baseline}
+.facts div:last-child{border-bottom:1px solid var(--line)}
+.facts b{font-family:var(--display);font-size:30px;line-height:1;font-variant-numeric:tabular-nums;color:var(--signal)}
+.facts em{font-style:normal;color:var(--muted);font-size:13.5px;display:block;margin-top:2px}
+.story{margin-top:48px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.story div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:6px;align-content:start}
+.story .mono{color:var(--accent)}
+.story h4{font-size:18px}
+.story p{color:var(--muted);font-size:15px}
+@media (max-width:860px){.case{grid-template-columns:minmax(0,1fr)}.story{grid-template-columns:minmax(0,1fr)}.facts div{grid-template-columns:96px minmax(0,1fr)}.facts b{font-size:26px}}
+
+/* CalTrack */
+.ct-hero{background:var(--band);color:var(--band-fg);border-radius:22px;padding:28px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:32px;align-items:center;overflow:hidden}
+.ct-logo{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.02em}
+.ct-logo i{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:#0B0E12;border:1px solid var(--band-line);font-style:normal;color:#D6F33A;font-size:15px}
+.ct-logo span b{color:#D6F33A;font-weight:800}
+.ct-hero h2{font-size:clamp(26px,3.4vw,40px);line-height:1.1;margin-top:16px}
+.ct-hero p{color:var(--band-muted);margin-top:12px;max-width:52ch}
+.ct-hero .tags{margin-top:18px}
+.ct-hero .tags span{background:var(--band-2);border-color:var(--band-line);color:var(--band-muted)}
+.ct-hero .cta{margin-top:22px}
+.shot{border-radius:12px;border:1px solid var(--band-line);overflow:hidden;background:#0B0E12;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.shot img{width:100%;height:auto}
+.viewer{margin-top:28px;display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:24px;align-items:start}
+.vlist{display:grid;gap:8px}
+.vlist button{display:grid;gap:2px;text-align:left;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);transition:border-color .15s,background .15s}
+.vlist button:hover{border-color:var(--accent)}
+.vlist button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.vlist b{font-family:var(--display);font-size:16px}
+.vlist span{font-size:13px;color:var(--muted)}
+.vlist button[aria-selected="true"] span{color:var(--bg);opacity:.72}
+.vshot{display:grid;gap:12px}
+.vshot .shot{border-color:var(--line)}
+.vshot p{color:var(--muted);font-size:15px;max-width:70ch}
+.blurnote{display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+.blurnote::before{content:"";width:10px;height:10px;border-radius:3px;background:repeating-linear-gradient(45deg,var(--muted) 0 2px,transparent 2px 4px)}
+.ct-points{margin-top:40px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.ct-points div{border-top:2px solid var(--accent);padding-top:14px;display:grid;gap:6px}
+.ct-points h4{font-size:17px}
+.ct-points p{color:var(--muted);font-size:15px}
+@media (max-width:900px){.ct-hero{grid-template-columns:minmax(0,1fr);padding:22px}.viewer{grid-template-columns:minmax(0,1fr)}.vlist{grid-template-columns:repeat(2,minmax(0,1fr))}.ct-points{grid-template-columns:minmax(0,1fr)}}
+
+/* voyages */
+.trips{display:grid;gap:56px}
+.trip-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:18px;border-bottom:1px solid var(--line);padding-bottom:14px}
+.trip-head h3{font-size:clamp(24px,3vw,32px)}
+.trip-head .mono{color:var(--accent)}
+.trip-head p{color:var(--muted);max-width:56ch}
+.mosaic{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:150px;gap:10px}
+.mosaic button{position:relative;border-radius:12px;overflow:hidden;background:var(--line)}
+.mosaic img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.mosaic button:hover img{transform:scale(1.05)}
+.mosaic figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 10px;font-size:13px;color:#fff;background:linear-gradient(180deg,transparent,rgba(5,10,16,.75));text-align:left;opacity:0;transition:opacity .2s}
+.mosaic button:hover figcaption,.mosaic button:focus-visible figcaption{opacity:1}
+.m-a{grid-column:span 4;grid-row:span 2}.m-b{grid-column:span 2;grid-row:span 2}.m-c{grid-column:span 2}.m-d{grid-column:span 2}.m-e{grid-column:span 2}.m-f{grid-column:span 3}.m-g{grid-column:span 3}
+@media (max-width:760px){.mosaic{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:130px}.m-a{grid-column:span 2;grid-row:span 2}.m-b{grid-column:span 1;grid-row:span 2}.m-c,.m-d,.m-e,.m-f,.m-g{grid-column:span 1}.mosaic figcaption{opacity:1;font-size:12px}}
+.cards2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.tcard{border-radius:18px;padding:24px;display:grid;gap:10px;align-content:space-between;min-height:220px;text-decoration:none;position:relative;overflow:hidden}
+.tcard h3{font-size:26px}
+.tcard p{font-size:15px}
+.tcard.nantes{background:var(--band);color:var(--band-fg)}
+.tcard.nantes p{color:var(--band-muted)}
+.tcard.nantes::after{content:"";position:absolute;right:-40px;bottom:-40px;width:220px;height:220px;border-radius:50%;border:1px dashed var(--band-line)}
+.tcard.nantes .play{width:54px;height:54px;border-radius:50%;background:var(--band-accent);display:grid;place-items:center;color:#0C1A15;position:relative;z-index:1}
+.tcard.soon{border:1.5px dashed var(--line);background:var(--surface)}
+.tcard.soon p{color:var(--muted)}
+.tcard .mono{color:var(--band-accent)}
+.tcard.soon .mono{color:var(--signal)}
+.photo-quote{margin-top:56px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:center;padding:24px;border-radius:18px;background:var(--surface);border:1px solid var(--line)}
+.photo-quote svg{color:var(--accent)}
+.photo-quote q{font-family:var(--display);font-size:clamp(18px,2.2vw,24px);line-height:1.35;quotes:"« " " »"}
+.photo-quote cite{display:block;margin-top:6px;color:var(--muted);font-style:normal;font-size:14px}
+@media (max-width:700px){.cards2{grid-template-columns:minmax(0,1fr)}.photo-quote{grid-template-columns:minmax(0,1fr)}}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:30;background:rgba(6,10,16,.94);display:grid;grid-template-rows:auto minmax(0,1fr) auto;padding:calc(12px + env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));color:#fff}
+.lb-top{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:12px;color:#B6C2D2;letter-spacing:.06em}
+.lb button{color:#fff}
+.lb-close{width:40px;height:40px;border-radius:50%;border:1px solid #3A475C;display:grid;place-items:center}
+.lb-stage{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px;min-height:0}
+.lb-stage img{max-width:100%;max-height:100%;margin:auto;border-radius:8px;object-fit:contain;min-height:0}
+.lb-nav{width:44px;height:44px;border-radius:50%;border:1px solid #3A475C;display:grid;place-items:center}
+.lb-cap{text-align:center;font-size:15px;color:#DCE3EC;padding-top:10px}
+
+/* quotes */
+.qtiles{grid-template-columns:repeat(4,minmax(0,1fr))}
+.qb{width:min(440px,calc(100% - 8px))}
+.qb .qar{font-family:var(--quote-ar);font-size:24px;line-height:1.7;direction:rtl;text-align:right;color:var(--band-fg);padding-right:34px}
+.qb .qtx{font-size:19px;line-height:1.35;padding-right:30px;font-weight:600}
+.qb .qwho{font-size:13px;color:var(--band-muted);border-top:1px solid var(--band-line);padding-top:10px}
+.qb .qwho b{color:var(--band-fg);font-weight:600}
+@media (max-width:900px){.qtiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.qcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px;display:grid;gap:14px;align-content:start}
+.qcard .ar{font-family:var(--quote-ar);font-size:clamp(22px,2.6vw,28px);line-height:1.7;direction:rtl;text-align:right;color:var(--ink)}
+.qcard .fr{font-family:var(--display);font-size:clamp(18px,2vw,21px);line-height:1.4;font-weight:600}
+.qcard .fr::before{content:"« "}.qcard .fr::after{content:" »"}
+.qcard.en-q .fr::before{content:"“"}.qcard.en-q .fr::after{content:"”"}
+.qcard footer{display:flex;justify-content:space-between;gap:12px;align-items:baseline;border-top:1px solid var(--line);padding-top:12px;flex-wrap:wrap}
+.qcard footer b{font-weight:600}
+.qcard footer span{color:var(--muted);font-size:13.5px}
+.qcard .why{color:var(--muted);font-size:14.5px}
+.qtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.qcard.big{grid-column:span 2;background:var(--band);color:var(--band-fg);border-color:var(--band-line)}
+.qcard.big .ar{color:var(--band-fg);font-size:clamp(26px,3.4vw,38px)}
+.qcard.big footer{border-color:var(--band-line)}
+.qcard.big footer span,.qcard.big .why{color:var(--band-muted)}
+@media (max-width:760px){.quotes{grid-template-columns:minmax(0,1fr)}.qcard.big{grid-column:auto}}
+
+/* toolkit + edu */
+.kit{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line)}
+.kit div{padding:22px 20px 6px 0}
+.kit div+div{padding-left:20px;border-left:1px solid var(--line)}
+.kit h3{font-size:17px;margin-bottom:12px}
+.kit li{padding-block:5px;font-size:15.5px}
+.kit li small{display:block;color:var(--muted);font-size:13px}
+@media (max-width:860px){.kit{grid-template-columns:repeat(2,minmax(0,1fr))}.kit div:nth-child(3){padding-left:0;border-left:0}.kit div:nth-child(n+3){border-top:1px solid var(--line)}}
+@media (max-width:460px){.kit{grid-template-columns:minmax(0,1fr)}.kit div+div{padding-left:0;border-left:0;border-top:1px solid var(--line)}}
+.edu{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:48px;margin-top:64px}
+.edu h3.sub{font-size:22px;margin-bottom:8px}
+.school{display:grid;grid-template-columns:110px minmax(0,1fr);gap:20px;padding-block:16px;border-top:1px solid var(--line)}
+.school .mono{color:var(--muted);padding-top:4px;letter-spacing:.04em}
+.school b{font-family:var(--display);font-size:18px;display:block;line-height:1.25}
+.school span{color:var(--muted);font-size:15px}
+.side h3{font-size:17px;margin-bottom:10px}
+.side ul+h3{margin-top:28px}
+.side li{display:flex;justify-content:space-between;gap:12px;padding-block:9px;border-top:1px solid var(--line);font-size:15.5px}
+.side li span{color:var(--muted)}
+@media (max-width:860px){.edu{grid-template-columns:minmax(0,1fr);gap:32px}.school{grid-template-columns:minmax(0,1fr);gap:2px}}
+
+/* contact */
+.contact-card{background:var(--band);color:var(--band-fg);border-radius:22px;padding:clamp(24px,5vw,56px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,380px);gap:32px;align-items:end}
+.contact-card h2{font-size:clamp(30px,4.4vw,52px);line-height:1.05;max-width:15ch}
+.contact-card p{color:var(--band-muted);margin-top:14px;max-width:52ch}
+.reach{display:grid;gap:10px;min-width:0}
+.mail{display:flex;align-items:center;gap:10px;background:var(--band-2);border:1px solid var(--band-line);border-radius:12px;padding:10px 10px 10px 16px;min-width:0}
+.mail code{font-family:var(--mono);font-size:14px;user-select:all;overflow-wrap:anywhere;min-width:0}
+.mail button{margin-left:auto;background:var(--band-accent);color:#0C1A15;font-weight:600;font-size:13.5px;padding:8px 14px;border-radius:8px;white-space:nowrap}
+.reach a{color:var(--band-muted);text-underline-offset:4px}
+.reach a:hover{color:var(--band-fg)}
+@media (max-width:760px){.contact-card{grid-template-columns:minmax(0,1fr)}}
+.foot{border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+.foot .wrap{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;padding-block:20px}
+
+/* mobile drawer */
+.drawer{position:fixed;inset:0;z-index:25;background:var(--band);color:var(--band-fg);padding:calc(20px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) 24px max(20px,env(safe-area-inset-left,0px));display:grid;align-content:start;gap:6px;overflow:auto}
+.drawer .dtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.drawer a{font-family:var(--display);font-size:26px;font-weight:600;text-decoration:none;padding:8px 0;border-bottom:1px solid var(--band-line);display:flex;justify-content:space-between}
+.drawer a span{font-family:var(--mono);font-size:12px;color:var(--band-muted);font-weight:400;align-self:center}
+.drawer .x{width:40px;height:40px;border-radius:50%;border:1px solid var(--band-line);display:grid;place-items:center}
+
+.fade{animation:fade .35s ease both}
+@keyframes fade{from{opacity:.001}to{opacity:1}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.flowline::after{left:87.5%}}
+</style>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#accueil"><i>HE</i><span>Hamza Elgoudany</span></a>
+    <nav class="links" id="links" aria-label="Pages"></nav>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4h12M2 8h12M2 12h12"/></svg><span data-t="menu"></span></button>
+    <div class="lang" role="group" aria-label="Langue / Language">
+      <button id="lang-fr" data-lang="fr" aria-pressed="true">FR</button>
+      <button id="lang-en" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="dtop"><span class="mono" style="color:var(--band-muted)" data-t="menu"></span><button class="x" id="drawer-x" aria-label="Fermer"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="1.8"><path d="M2 2l10 10M12 2L2 12"/></svg></button></div>
+  <div id="drawer-links" style="display:grid;gap:4px"></div>
+</div>
+
+<main id="app">
+<!-- HOME -->
+<div data-route="accueil" class="route">
+  <div class="band">
+    <div class="wrap">
+      <div class="hero">
+        <div>
+          <p class="mono eyebrow"><span data-t="hero.role"></span><b data-t="hero.place"></b></p>
+          <h1 data-h="hero.title"></h1>
+          <p class="lede" data-h="hero.lede"></p>
+          <div class="cta">
+            <a class="btn primary" href="#parcours" data-t="hero.cta1"></a>
+            <a class="btn ghost" href="#contact" data-t="hero.cta2"></a>
+            <button class="btn ghost cvbtn" data-cv hidden><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 2v8M4.5 7L8 10.5 11.5 7M3 13.5h10"/></svg><span data-t="cv.btn"></span></button>
+          </div>
+        </div>
+        <div class="portrait"><img src="img/portrait.jpg" alt="Hamza Elgoudany" width="320" height="320"><span data-t="hero.badge"></span></div>
+      </div>
+      <div class="stats" id="stats"></div>
+    </div>
+  </div>
+  <section class="rooms">
+    <div class="wrap">
+      <div class="rooms-head"><h2 data-t="rooms.title"></h2><p data-t="rooms.text"></p></div>
+      <p class="group-label"><b data-t="g.pro"></b></p>
+      <div class="grid-rooms" id="rooms-pro"></div>
+      <div class="group-gap"></div>
+      <p class="group-label"><b data-t="g.beyond"></b></p>
+      <div class="grid-rooms" id="rooms-beyond"></div>
+    </div>
+  </section>
+</div>
+
+<!-- PARCOURS -->
+<section data-route="parcours" class="route page" hidden><div class="wrap">
+  <div class="crumb"><a href="#accueil" data-t="back"></a></div>
+  <div class="head"><p class="mono" data-t="path.kicker"></p><h2 data-t="path.title"></h2><p data-t="path.intro"></p></div>
+  <div class="filters" id="filters" role="group"></div>
+  <div id="tl"></div>
+  <div class="sec-title" id="sec-formation"><p class="mono" data-t="kit.kicker"></p><h3 data-t="kit.title"></h3></div>
+  <div class="kit" id="kit"></div>
+  <div class="edu"><div><h3 class="sub" data-t="edu.title"></h3><div id="schools"></div></div><div class="side" id="side"></div></div>
+  <div class="pager" data-pager></div>
+</div></section>
+
+<!-- COMPETENCES -->
+<section data-route="competences" class="route page" hidden><div class="wrap">
+  <div class="crumb"><a href="#accueil" data-t="back"></a></div>
+  <div class="head"><p class="mono" data-t="sk.kicker"></p><h2 data-t="sk.title"></h2><p data-t="sk.intro"></p></div>
+  <div class="skwrap" id="skwrap">
+    <p class="group-label"><b data-t="sk.hard"></b></p>
+    <div class="tiles" id="tiles-hard"></div>
+    <p class="group-label" style="margin-top:34px"><b data-t="sk.soft"></b></p>
+    <div class="tiles" id="tiles-soft"></div>
+    <div class="bubble" id="bubble" role="dialog" aria-modal="false" hidden></div>
+  </div>
+  <div class="pager" data-pager></div>
+</div></section>
+
+<!-- METHODE -->
+<section data-route="methode" class="route page" hidden><div class="wrap">
+  <div class="crumb"><a href="#accueil" data-t="back"></a></div>
+  <div class="head"><p class="mono" data-t="method.kicker"></p><h2 data-t="method.title"></h2><p data-t="method.intro"></p></div>
+  <div class="flowline" id="flowline" role="tablist"></div>
+  <div class="panel" id="panel" role="tabpanel" aria-live="polite"></div>
+  <div class="sec-title" id="sec-prototype"><p class="mono" data-t="prac.kicker"></p><h3 data-t="prac.title"></h3><p data-t="prac.intro"></p></div>
+  <div class="ba" id="ba"></div>
+  <div class="gains" id="gains"></div>
+  <div class="learned" id="learned"></div>
+  <div class="pager" data-pager></div>
+</div></section>
+
+<!-- CAS IA -->
+<section data-route="ia" class="route page" hidden><div class="wrap">
+  <div class="crumb"><a href="#accueil" data-t="back"></a></div>
+  <div class="head"><p class="mono" data-t="ia.kicker"></p><h2 data-t="ia.title"></h2><p data-t="ia.intro"></p></div>
+  <div class="bricks" id="bricks" role="tablist"></div>
+
+  <div class="brick" id="brick-agib" role="tabpanel">
+    <div class="brick-head"><span class="bn">01</span><div><p class="mono" data-t="ai.kicker"></p><h3 data-t="ai.title"></h3><p data-t="ai.intro"></p></div></div>
+    <div class="rolebox"><p class="mono" data-t="role.k"></p><p data-t="role.t"></p></div>
+    <div class="case">
+      <div>
+        <div class="grid10" id="grid10" role="group"></div>
+        <div class="legend"><span><i class="d"></i><span data-t="ai.leg1"></span></span><span><i></i><span data-t="ai.leg2"></span></span></div>
+        <div class="caption" id="caption" aria-live="polite"></div>
+      </div>
+      <div class="facts" id="facts"></div>
+    </div>
+  </div>
+
+  <div class="brick" id="brick-caltrack" role="tabpanel" hidden>
+    <div class="brick-head"><span class="bn">02</span><div><p class="mono" data-t="ct.kicker"></p><h3 data-t="ct.sectitle"></h3><p data-t="ct.secintro"></p></div></div>
+    <div class="ct-hero">
+      <div>
+        <div class="ct-logo"><i>CT</i><span>CAL<b>TRACK</b></span></div>
+        <h2 data-t="ct.title"></h2>
+        <p data-t="ct.text"></p>
+        <div class="tags" id="ct-tags"></div>
+        <div class="cta"><a class="btn primary" href="https://cal-track-topaz.vercel.app/" target="_blank" rel="noopener" data-t="ct.open"></a></div>
+      </div>
+      <div class="shot"><img src="img/ct-arabe.jpg" alt="CalTrack en arabe, interface en miroir" width="1225" height="470"></div>
+    </div>
+    <div class="viewer">
+      <div class="vlist" id="vlist" role="tablist"></div>
+      <div class="vshot" id="vshot" role="tabpanel" aria-live="polite"></div>
+    </div>
+    <div class="ct-points" id="ct-points"></div>
+  </div>
+  <div class="pager" data-pager></div>
+</div></section>
+
+<!-- AU-DELA DU PRO -->
+<section data-route="perso" class="route page" hidden><div class="wrap">
+  <div class="crumb"><a href="#accueil" data-t="back"></a></div>
+  <div class="head"><p class="mono" data-t="perso.kicker"></p><h2 data-t="perso.title"></h2><p data-t="perso.intro"></p></div>
+  <div class="sec-title" id="sec-voyages" style="margin-top:24px"><p class="mono" data-t="trip.kicker"></p><h3 data-t="trip.title"></h3><p data-t="trip.intro"></p></div>
+  <div class="trips">
+    <div>
+      <div class="trip-head"><div><p class="mono" data-t="indo.when"></p><h3 data-t="indo.title"></h3></div><p data-t="indo.text"></p></div>
+      <div class="mosaic" id="mosaic"></div>
+    </div>
+    <div class="cards2">
+      <a class="tcard nantes" href="https://drive.google.com/file/d/18Et8tOIKJ3JRX-8boV6W_eSxuHuZq_2F/view" target="_blank" rel="noopener">
+        <div><p class="mono" data-t="nantes.when"></p><h3 style="margin-top:8px">Nantes</h3><p style="margin-top:8px" data-t="nantes.text"></p></div>
+        <div style="display:flex;align-items:center;gap:12px;position:relative;z-index:1"><span class="play"><svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor"><path d="M5 3l10 6-10 6z"/></svg></span><b data-t="nantes.cta"></b></div>
+      </a>
+      <div class="tcard soon">
+        <div><p class="mono" data-t="turk.when"></p><h3 style="margin-top:8px" data-t="turk.title"></h3><p style="margin-top:8px" data-t="turk.text"></p></div>
+        <p class="mono" style="color:var(--muted)" data-t="soon"></p>
+      </div>
+    </div>
+  </div>
+  <div class="sec-title" id="sec-citations"><p class="mono" data-t="q.kicker"></p><h3 data-t="q.title"></h3><p data-t="q.intro"></p></div>
+  <div class="skwrap" id="qwrap"><div class="tiles qtiles" id="quotes"></div><div class="bubble qb" id="qbub" role="dialog" aria-modal="false" hidden></div></div>
+  <div class="pager" data-pager></div>
+</div></section>
+
+<!-- CONTACT -->
+<section data-route="contact" class="route page" hidden><div class="wrap">
+  <div class="crumb"><a href="#accueil" data-t="back"></a></div>
+  <div class="contact-card">
+    <div><h2 data-t="contact.title"></h2><p data-t="contact.text"></p></div>
+    <div class="reach">
+      <div class="mail"><code id="email">hamza.elgoudany1@gmail.com</code><button id="copy" data-t="contact.copy"></button></div>
+      <a href="https://www.hamzaelgoudany.com" target="_blank" rel="noopener">www.hamzaelgoudany.com</a>
+      <button class="btn ghost cvbtn" data-cv hidden style="justify-self:start"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 2v8M4.5 7L8 10.5 11.5 7M3 13.5h10"/></svg><span data-t="cv.btn"></span></button>
+      <span class="mono" style="color:var(--band-muted)" data-t="contact.refs"></span>
+    </div>
+  </div>
+  <div class="pager" data-pager></div>
+</div></section>
+</main>
+
+<footer class="foot"><div class="wrap"><span>© 2026 Hamza Elgoudany</span><span data-t="foot.note"></span></div></footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo">
+  <div class="lb-top"><span id="lb-count"></span><button class="lb-close" id="lb-close" aria-label="Fermer"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="1.8"><path d="M2 2l10 10M12 2L2 12"/></svg></button></div>
+  <div class="lb-stage"><button class="lb-nav" id="lb-prev" aria-label="Précédente"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 3L5 8l5 5"/></svg></button><img id="lb-img" alt=""><button class="lb-nav" id="lb-next" aria-label="Suivante"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3l5 5-5 5"/></svg></button></div>
+  <p class="lb-cap" id="lb-cap"></p>
+</div>
+
+<script>
+(function(){
+"use strict";
+var ARROW='<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11L11 3M5 3h6v6"/></svg>';
+var ROUTES=["accueil","parcours","competences","methode","ia","perso","contact"];
+var ALIAS={"p-ocp2":["parcours","m-ocp2"],"p-ocp1":["parcours","m-ocp1"],"p-innovx":["parcours","m-innovx"],"p-inetum":["parcours","m-inetum"],"p-cmec":["parcours","m-cmec"],"p-formation":["parcours","sec-formation"],"prototype":["methode","sec-prototype"],"cas-ia":["ia","agib"],"agib":["ia","agib"],"caltrack":["ia","caltrack"],"voyages":["perso","sec-voyages"],"citations":["perso","sec-citations"],"outils":["parcours",null]};
+var T={
+fr:{
+ menu:"Menu",back:"← Retour au menu",prev:"Précédent",next:"Suivant",
+ "r.parcours":"Parcours","r.methode":"Méthode","r.ia":"Cas IA","r.perso":"Au-delà du pro","r.contact":"Contact","r.accueil":"Accueil","r.voyages":"Voyages & photo","r.citations":"Ce qui me guide",
+ "g.pro":"Côté pro","g.beyond":"Au-delà du pro",
+ "ia.kicker":"Cas IA","ia.title":"Deux projets, deux façons d'utiliser l'IA","ia.intro":"L'un en entreprise, pour un service Achats. L'autre en solo, pour apprendre à construire. Choisissez un projet.",
+ "b1.t":"Chatbot AGIB","b1.s":"InnovX · l'IA au service d'un métier","b1.tag":"Entreprise","b2.t":"CalTrack","b2.s":"Projet personnel · l'IA pour construire","b2.tag":"Solo",
+ "prac.kicker":"Zoom sur l'étape Prototype","prac.title":"Ce que l'IA a changé dans cette étape","prac.intro":"Depuis CalTrack, je peux construire moi-même le prototype. La place du document dans le processus a changé.",
+ "r.competences":"Compétences","sk.kicker":"Compétences","sk.title":"Ce que je sais faire, et où je l'ai fait","sk.intro":"Cliquez sur une compétence pour voir où je l'ai mise en pratique.","sk.hint":"","sk.hard":"Hard skills","sk.soft":"Soft skills",
+ "ct.kicker":"Projet personnel · 2026","ct.sectitle":"CalTrack, construite de bout en bout avec l'IA","ct.secintro":"Une app complète, que j'ai cadrée, dessinée et développée moi-même. J'y ai appris le développement, GitHub, Supabase et Vercel en avançant avec l'IA.",
+ "story.kicker":"Mon parcours avec l'IA","story.title":"De la curiosité à la pratique quotidienne",
+ "perso.kicker":"Au-delà du pro","perso.title":"L'homme derrière le CV","perso.intro":"Ce que je regarde, ce que je photographie, et les phrases qui m'accompagnent.",
+ "hero.role":"Product Owner Digital & IA","hero.place":"Fonctions Corporate · Maroc",
+ "hero.title":"Des outils digitaux qui répondent à de <em>vrais besoins métier</em>.",
+ "hero.lede":"Je pars du besoin, je pose le processus et la gouvernance, puis je livre un <strong>prototype fonctionnel en quelques jours</strong>. Plus de cinq ans en transformation digitale (AMOA, PMO) sur SAP-Ariba, ServiceNow et Power BI. Aujourd'hui dans le programme Beyond d'OCP, sur l'organisation et le pilotage des fonctions corporate.",
+ "hero.cta1":"Voir le parcours","hero.cta2":"Me contacter","hero.badge":"OCP · Programme Beyond",
+ "rooms.title":"Par où voulez-vous commencer ?","rooms.text":"Chaque carte ouvre une page. Le côté pro d'abord, puis l'homme derrière le CV.",
+ "path.kicker":"Parcours","path.title":"Cinq ans, quatre maisons, un fil conducteur","path.intro":"Filtrez par domaine pour voir où chaque compétence a été exercée.","all":"Tout",
+ "method.kicker":"Méthode","method.title":"Du besoin au prototype, sans perdre le métier en route","method.intro":"Quatre étapes que j'applique dans cet ordre. Cliquez sur une étape : chacune est illustrée par un livrable réel.","proof":"Preuve terrain",
+ "ai.kicker":"InnovX · 2025","ai.title":"Chatbot AGIB : 10 cas d'usage priorisés, 6 livrés","ai.intro":"Chez InnovX, j'ai piloté le chatbot IA des Achats, de la priorisation des cas d'usage au suivi des utilisateurs. Six cas sur dix ont été livrés ; les autres ont été dépriorisés ou n'ont pas abouti.","role.k":"Mon rôle, concrètement","role.t":"J'étais rattaché aux Achats, en support. La Product Owner officielle faisait partie de l'équipe IA. Dans les faits, je tenais le rôle de Product Owner : je portais les cas d'usage, j'animais le lien avec le métier et je les traduisais directement aux développeurs. Elle supervisait et validait mes traductions.","fact.lbl.m":"Mesuré","fact.lbl.e":"Estimé",
+ "ai.leg1":"Livré","ai.leg2":"Dépriorisé ou non abouti","ai.default.b":"6 cas d'usage sur 10 en production","ai.default.s":"Sélectionnez une case pour voir le détail.",
+ "ai.done":"Cas d'usage livré","ai.done.s":"Livré et utilisé par les équipes Achats.","ai.not":"Dépriorisé ou non abouti","ai.not.s":"Arbitrage du management ou contrainte du système d'information, comme l'arrivée de SAP-Ariba.",
+ "ct.title":"Nutrition et entraînement, en trois langues","ct.text":"Journal des repas, suivi du poids, programmes d'entraînement et simulateur de journée, avec un catalogue d'aliments marocains. Livrée à de premiers utilisateurs, puis améliorée sur leurs retours.","ct.open":"Ouvrir l'app ↗","ct.blur":"Chiffres personnels floutés",
+ "trip.kicker":"Voyages & photographie","trip.title":"Ce que je regarde quand je ne travaille pas","trip.intro":"J'aime voyager et j'aime photographier. Voici quelques images, cliquez pour les agrandir.",
+ "indo.when":"Indonésie · 2017","indo.title":"Sulawesi du Sud, entre rivières et îles","indo.text":"Un séjour d'immersion : musique, scène, cuisine locale et des îles à l'eau turquoise.",
+ "nantes.when":"France","nantes.text":"Une sélection de mes meilleures photos de Nantes, montées en vidéo.","nantes.cta":"Voir la vidéo",
+ "turk.when":"Turquie · 2022","turk.title":"Turquie","turk.text":"Les photos de ce voyage arrivent bientôt.","soon":"Bientôt en ligne",
+ "cb.q":"Photographier, c'est mettre sur la même ligne de mire la tête, l'œil et le cœur.","cb.c":"Henri Cartier-Bresson",
+ "q.kicker":"Ce qui me guide","q.title":"Des phrases que je garde en tête","q.intro":"Quatre phrases qui disent, chacune à sa façon, ce que j'essaie de faire au travail. Touchez une tuile pour la lire.","q.all":"Toutes","q.ar":"Savants arabes","q.west":"Penseurs occidentaux",
+ "kit.kicker":"Outils & formation","kit.title":"Ce que j'utilise au quotidien","edu.title":"Ingénieur de formation, consultant de métier","certs":"Certifications","langs":"Langues",
+ "contact.title":"Un besoin métier à transformer en outil ?","contact.text":"Écrivez-moi. Je réponds avec une première lecture du besoin et une proposition de cadrage.","contact.copy":"Copier","contact.copied":"Copié","cv.btn":"CV en PDF","cv.no":"Téléchargement indisponible","contact.refs":"Références sur demande",
+ "foot.note":"Site conçu à partir de mon CV 2026"
+},
+en:{
+ menu:"Menu",back:"← Back to menu",prev:"Previous",next:"Next",
+ "r.parcours":"Experience","r.methode":"Method","r.ia":"AI cases","r.perso":"Beyond work","r.contact":"Contact","r.accueil":"Home","r.voyages":"Travel & photo","r.citations":"What guides me",
+ "g.pro":"Professional","g.beyond":"Beyond work",
+ "ia.kicker":"AI cases","ia.title":"Two projects, two ways of using AI","ia.intro":"One inside a company, for a Purchasing team. The other on my own, to learn how to build. Pick a project.",
+ "b1.t":"AGIB chatbot","b1.s":"InnovX · AI serving a business team","b1.tag":"Company","b2.t":"CalTrack","b2.s":"Personal project · AI to build","b2.tag":"Solo",
+ "prac.kicker":"Zoom on the Prototype step","prac.title":"What AI changed in this step","prac.intro":"Since CalTrack, I can build the prototype myself. The place of the document in the process has changed.",
+ "r.competences":"Skills","sk.kicker":"Skills","sk.title":"What I can do, and where I did it","sk.intro":"Click a skill to see where I put it into practice.","sk.hint":"","sk.hard":"Hard skills","sk.soft":"Soft skills",
+ "ct.kicker":"Personal project · 2026","ct.sectitle":"CalTrack, built end to end with AI","ct.secintro":"A full app I scoped, designed and developed myself. I learned development, GitHub, Supabase and Vercel along the way, working with AI.",
+ "story.kicker":"My journey with AI","story.title":"From curiosity to daily practice",
+ "perso.kicker":"Beyond work","perso.title":"The person behind the CV","perso.intro":"What I look at, what I photograph, and the words I keep with me.",
+ "hero.role":"Digital & AI Product Owner","hero.place":"Corporate Functions · Morocco",
+ "hero.title":"Digital tools that answer <em>real business needs</em>.",
+ "hero.lede":"I start from the need, set the process and governance, then ship a <strong>working prototype within days</strong>. Five-plus years in digital transformation (business analysis, PMO) on SAP Ariba, ServiceNow and Power BI. Now in OCP's Beyond programme, working on the organisation and steering of corporate functions.",
+ "hero.cta1":"See my experience","hero.cta2":"Get in touch","hero.badge":"OCP · Beyond programme",
+ "rooms.title":"Where would you like to start?","rooms.text":"Each card opens a page. The professional side first, then the person behind it.",
+ "path.kicker":"Experience","path.title":"Five years, four organisations, one thread","path.intro":"Filter by domain to see where each skill was put to work.","all":"All",
+ "method.kicker":"Method","method.title":"From need to prototype, without losing the business on the way","method.intro":"Four steps, applied in this order. Click a step: each one is backed by a real deliverable.","proof":"Field evidence",
+ "ai.kicker":"InnovX · 2025","ai.title":"AGIB chatbot: 10 prioritised use cases, 6 delivered","ai.intro":"At InnovX I led the Purchasing AI chatbot, from prioritising use cases to following up with users. Six of ten use cases were delivered; the others were deprioritised or did not make it.","role.k":"My role, in practice","role.t":"I sat in the Purchasing team, in a support role. The official Product Owner belonged to the AI team. In practice, I played the Product Owner role: I owned the use cases, ran the link with the business and translated them directly to the developers. She supervised and checked my translations.","fact.lbl.m":"Measured","fact.lbl.e":"Estimate",
+ "ai.leg1":"Delivered","ai.leg2":"Deprioritised or not completed","ai.default.b":"6 of 10 use cases in production","ai.default.s":"Select a tile to see the detail.",
+ "ai.done":"Delivered use case","ai.done.s":"Delivered and used by the Purchasing teams.","ai.not":"Deprioritised or not completed","ai.not.s":"A management trade-off or an information-system constraint, such as the arrival of SAP Ariba.",
+ "ct.title":"Nutrition and training, in three languages","ct.text":"Meal log, weight tracking, training programmes and a day simulator, with a catalogue of Moroccan foods. Shipped to first users, then improved on their feedback.","ct.open":"Open the app ↗","ct.blur":"Personal figures blurred",
+ "trip.kicker":"Travel & photography","trip.title":"What I look at when I'm not working","trip.intro":"I love travelling and I love taking pictures. Here are a few, click to enlarge.",
+ "indo.when":"Indonesia · 2017","indo.title":"South Sulawesi, between rivers and islands","indo.text":"An immersion stay: music, the stage, local food and islands with turquoise water.",
+ "nantes.when":"France","nantes.text":"A selection of my best photos of Nantes, edited into a video.","nantes.cta":"Watch the video",
+ "turk.when":"Turkey · 2022","turk.title":"Turkey","turk.text":"Photos from this trip are coming soon.","soon":"Coming soon",
+ "cb.q":"To photograph is to put one's head, one's eye and one's heart on the same axis.","cb.c":"Henri Cartier-Bresson",
+ "q.kicker":"What guides me","q.title":"Words I keep in mind","q.intro":"Four sentences that each say, in their own way, what I try to do at work. Tap a tile to read it.","q.all":"All","q.ar":"Arab scholars","q.west":"Western thinkers",
+ "kit.kicker":"Toolkit & education","kit.title":"What I use day to day","edu.title":"Engineer by training, consultant by trade","certs":"Certifications","langs":"Languages",
+ "contact.title":"A business need to turn into a tool?","contact.text":"Write to me. I will come back with a first read of the need and a proposed scoping.","contact.copy":"Copy","contact.copied":"Copied","cv.btn":"CV (PDF)","cv.no":"Download unavailable","contact.refs":"References on request",
+ "foot.note":"Site built from my 2026 CV"
+}};
+
+var ROOMS={
+ fr:{"parcours":"OCP, InnovX, Inetum, CMEC : missions, chiffres, outils et formation, filtrables par domaine.","methode":"Cadrage, processus, gouvernance, prototype. Quatre étapes, quatre preuves.","ia":"Deux projets : le chatbot AGIB chez InnovX, et CalTrack, mon app construite avec l'IA.","contact":"Un besoin à transformer en outil ? Écrivez-moi.","competences":"Hard et soft skills, chacune reliée à l'exemple qui la prouve.","voyages":"Indonésie, Nantes, Turquie. Ce que je photographie.","citations":"Les phrases qui me guident."},
+ en:{"parcours":"OCP, InnovX, Inetum, CMEC: missions, figures, tools and education, filterable by domain.","methode":"Scoping, process, governance, prototype. Four steps, four proofs.","ia":"Two projects: the AGIB chatbot at InnovX, and CalTrack, my app built with AI.","contact":"A need to turn into a tool? Write to me.","competences":"Hard and soft skills, each linked to the example that proves it.","voyages":"Indonesia, Nantes, Turkey. What I photograph.","citations":"The words that guide me."}
+};
+var BA={
+ fr:{b:{t:"Avant",h:"Le besoin passait par un document",s:[["Cas d'usage","Atelier avec le métier"],["Spécifications fonctionnelles","Le quoi"],["Spécifications techniques","Le comment"],["Développement","Par l'équipe IT, plusieurs semaines"],["Premier écran","Le métier découvre enfin le résultat"]],o:"Les écarts apparaissent tard, quand ils coûtent cher."},
+     a:{t:"Aujourd'hui",h:"Le besoin passe par un prototype",s:[["Cas d'usage","Atelier avec le métier"],["Prototype fonctionnel","Construit avec l'IA, en quelques jours"],["Réaction du métier","On ajuste sur du concret"],["Spécifications alignées","Écrites à partir du prototype validé"],["Développement","Les développeurs partent d'une cible claire"]],o:"Le métier voit son idée dès le départ. La discussion avec les développeurs devient simple."}},
+ en:{b:{t:"Before",h:"The need went through a document",s:[["Use cases","Workshop with the business"],["Functional specifications","The what"],["Technical specifications","The how"],["Development","By the IT team, several weeks"],["First screen","The business finally sees the result"]],o:"Gaps surface late, when they are expensive."},
+     a:{t:"Today",h:"The need goes through a prototype",s:[["Use cases","Workshop with the business"],["Working prototype","Built with AI, within days"],["Business feedback","We adjust on something concrete"],["Aligned specifications","Written from the validated prototype"],["Development","Developers start from a clear target"]],o:"The business sees its idea from day one. The conversation with developers becomes simple."}}
+};
+var GAINS={fr:[["Visualiser mon imagination","Je peux enfin donner forme à une idée, la mienne ou celle d'un client, en quelques jours."],["Parler le langage des développeurs","Je comprends les briques techniques. Les échanges avec l'IT sont plus courts et plus précis."],["Aligner avant d'investir","Le prototype valide le besoin avant le développement lourd. Moins de retours tardifs."]],
+ en:[["Visualising my imagination","I can finally give shape to an idea, mine or a client's, within days."],["Speaking developers' language","I understand the technical building blocks. Exchanges with IT are shorter and sharper."],["Aligning before investing","The prototype validates the need before heavy development. Fewer late surprises."]]};
+var LEARNED={fr:["Ce que j'ai appris avec l'IA :","Développement React","GitHub","Supabase","Vercel","Product design","Prompting"],en:["What I learned with AI:","React development","GitHub","Supabase","Vercel","Product design","Prompting"]};
+
+var STATS={
+ fr:[["5","+","ans d'expérience","De CMEC à OCP, quatre organisations",[["2021 – 2022","CMEC · développement des affaires"],["2022 – 2025","Inetum Consulting · AMOA"],["2025 – 2026","InnovX · Product Owner & PMO"],["2026 –","OCP · programme Beyond"]]],
+     ["2","","diplômes Grande École","Ingénieur et business school",[["2016 – 2018","École Centrale Casablanca · ingénieur généraliste"],["2018 – 2020","Audencia Business School · Grande École, majeure Consulting"],["En cours","Programme Beyond · ABS (UM6P), modules IMD"]]],
+     ["4","","secteurs d'activité","Du terrain télécom aux mines",[["Télécoms","CMEC, inwi"],["Secteur public","Ministère de la Transition numérique (MTNRA)"],["Innovation & tech","InnovX"],["Mines & industrie","OCP"]]],
+     ["9","","outils SI déployés ou intégrés","Pilotés, intégrés ou spécifiés",[["Freshservice","Product Owner du déploiement"],["Chatbot IA AGIB","Product Owner de fait"],["SAP-Ariba","Intégration Procure-to-Pay"],["ServiceNow","Cahier des charges FSM"],["SAP","Interfaces ServiceNow et Ariba"],["Power BI","Tableaux de bord InnovX, OCP, MTNRA"],["Power Apps / Dataverse","Pilote Maroc Digital 2030"],["SharePoint","Socle de données STMP"],["Deswik","Intégration avec Power BI"]]]],
+ en:[["5","+","years of experience","From CMEC to OCP, four organisations",[["2021 – 2022","CMEC · business development"],["2022 – 2025","Inetum Consulting · business analysis"],["2025 – 2026","InnovX · Product Owner & PMO"],["2026 –","OCP · Beyond programme"]]],
+     ["2","","Grande École degrees","Engineering and business school",[["2016 – 2018","École Centrale Casablanca · general engineering"],["2018 – 2020","Audencia Business School · Grande École, Consulting major"],["Ongoing","Beyond programme · ABS (UM6P), IMD modules"]]],
+     ["4","","industries","From telecom fieldwork to mining",[["Telecom","CMEC, inwi"],["Public sector","Ministry of Digital Transition (MTNRA)"],["Innovation & tech","InnovX"],["Mining & industry","OCP"]]],
+     ["9","","IT tools deployed or integrated","Led, integrated or specified",[["Freshservice","Product Owner of the rollout"],["AGIB AI chatbot","De facto Product Owner"],["SAP Ariba","Procure-to-Pay integration"],["ServiceNow","FSM requirements"],["SAP","ServiceNow and Ariba interfaces"],["Power BI","Dashboards at InnovX, OCP, MTNRA"],["Power Apps / Dataverse","Maroc Digital 2030 pilot"],["SharePoint","STMP data foundation"],["Deswik","Integration with Power BI"]]]]
+};
+var openSt=-1;
+
+var STEPS={
+fr:[
+ {t:"Cadrage",h:"Comprendre le besoin avant l'outil",w:"Je passe du temps avec le métier pour formuler le vrai problème, puis je le traduis en périmètre et en user stories que l'IT peut chiffrer.",p:"Revue des processus de déploiement fibre et sites mobiles, puis cahier des charges de ServiceNow Field Service Management (interface SAP) rédigé à partir d'environ 30 user stories.",o:"inwi · Inetum Consulting"},
+ {t:"Processus",h:"Dessiner qui fait quoi, et quand",w:"Un outil ne corrige pas un processus flou. Je clarifie les étapes, les rôles et les points de décision avant de parler d'écrans.",p:"Démarche de gestion des expertises du Groupe : ce qui reste centralisé au corporate, ce qui relève des SBUs, et comment mobiliser la bonne expertise, au bon moment, à la demande d'une SBU.",o:"OCP · Équipe Organizing"},
+ {t:"Gouvernance",h:"Faire tenir la solution dans la durée",w:"Je définis les règles du jeu : mode opératoire, RACI, instance d'arbitrage. Sans cela, l'outil s'éteint au départ du projet.",p:"Mode opératoire, RACI et réunion hebdomadaire d'arbitrage pour la planification minière court terme, repris par les équipes après la mission.",o:"OCP · Sidi Chennane"},
+ {t:"Prototype",h:"Montrer plutôt que décrire",w:"Je construis moi-même un prototype fonctionnel en quelques jours. Le métier réagit à quelque chose de concret, et la suite se décide vite.",p:"Jumeau numérique de l'organisation reliant entités, flux, processus et gouvernance, pour simuler l'impact d'un changement. Côté personnel : CalTrack, livrée de bout en bout.",o:"OCP · Équipe Organizing, et CalTrack"}],
+en:[
+ {t:"Scoping",h:"Understand the need before the tool",w:"I spend time with the business to state the real problem, then turn it into a scope and user stories that IT can estimate.",p:"Review of fibre and mobile-site rollout processes, then the requirements document for ServiceNow Field Service Management (SAP interface), written from about 30 user stories.",o:"inwi · Inetum Consulting"},
+ {t:"Process",h:"Map who does what, and when",w:"A tool does not fix a blurry process. I clarify steps, roles and decision points before talking about screens.",p:"Approach for managing the Group's expertise: what stays centralised at corporate, what belongs to the SBUs, and how to mobilise the right expertise at the right time when an SBU asks.",o:"OCP · Organizing team"},
+ {t:"Governance",h:"Make the solution last",w:"I set the rules: operating procedure, RACI, arbitration forum. Without them, the tool fades when the project team leaves.",p:"Operating procedure, RACI and a weekly arbitration meeting for short-term mine planning, taken over by the teams after the mission.",o:"OCP · Sidi Chennane"},
+ {t:"Prototype",h:"Show rather than describe",w:"I build a working prototype myself within days. The business reacts to something concrete, and next steps get decided fast.",p:"Digital twin of the organisation linking entities, flows, processes and governance, to simulate the impact of a change. On the personal side: CalTrack, shipped end to end.",o:"OCP · Organizing team, and CalTrack"}]
+};
+
+var CATS={ai:{fr:"IA",en:"AI"},data:{fr:"Data & BI",en:"Data & BI"},prod:{fr:"Produit & SI",en:"Product & IT"},org:{fr:"Organisation & gouvernance",en:"Organisation & governance"},pm:{fr:"Pilotage de projet",en:"Project delivery"}};
+var JOBS=[
+ {when:{fr:"janv. 2026 – aujourd'hui",en:"Jan 2026 – present"},now:true,title:{fr:"Programme Beyond",en:"Beyond programme"},org:{fr:"OCP × Africa Business School / UM6P",en:"OCP × Africa Business School / UM6P"},
+  missions:[
+   {cats:["org","ai"],name:{fr:"Mission 2 · Équipe Organizing : modèle d'organisation et accès aux expertises critiques du Groupe",en:"Mission 2 · Organizing team: operating model and access to the Group's critical expertise"},when:{fr:"oct. 2026 – auj.",en:"Oct 2026 – present"},
+    tags:{fr:["Operating model","Business capabilities","Gouvernance","Conception de processus (RACI)","IA générative","SharePoint"],en:["Operating model","Business capabilities","Governance","Process design (RACI)","Generative AI","SharePoint"]},
+    pts:{fr:["Conçu la démarche de gestion des expertises du Groupe : ce qui reste centralisé au corporate, ce qui relève des SBUs, et comment mobiliser la bonne expertise, au bon moment, à la demande d'une SBU.","Conçu et prototypé un <strong>jumeau numérique de l'organisation</strong> reliant entités, flux, processus et gouvernance, pour simuler l'impact d'un changement, avec veille de bonnes pratiques externes et assistant IA intégré."],
+         en:["Designed the approach for managing the Group's expertise: what stays centralised at corporate, what belongs to the SBUs, and how to mobilise the right expertise at the right time when an SBU asks.","Designed and prototyped a <strong>digital twin of the organisation</strong> linking entities, flows, processes and governance, to simulate the impact of a change, with external best-practice watch and a built-in AI assistant."]}},
+   {cats:["pm","data","org"],name:{fr:"Mission 1 · Short-Term Mine Planning, Sidi Chennane (en binôme)",en:"Mission 1 · Short-Term Mine Planning, Sidi Chennane (in a pair)"},when:{fr:"janv. – sept. 2026",en:"Jan – Sep 2026"},
+    tags:{fr:["Pilotage agile","Modélisation de données","Power BI","SharePoint","Intégration IT","Deswik"],en:["Agile delivery","Data modelling","Power BI","SharePoint","IT integration","Deswik"]},
+    pts:{fr:["Piloté en binôme une démarche agile en <strong>6 sprints</strong> pour passer du plan Deswik à un pilotage collaboratif de la planification minière court terme.","Construit le socle de données SharePoint et le reporting Power BI, et défini la gouvernance (mode opératoire, RACI, réunion hebdomadaire d'arbitrage) reprise par les équipes.","Le tableau de bord est passé de 1 à 2 lecteurs au bureau des méthodes à <strong>une dizaine d'ingénieurs</strong> (exploitation, maintenance, prospection), consultable sur smartphone en temps réel. La réunion hebdomadaire de mine planning a regagné en participation.","<strong>Repris par la mine de Merah (MEA), à Khouribga</strong> : passation et adaptation du tableau de bord à leur contexte, intégré à leur réunion hebdomadaire."],
+         en:["Co-led an agile approach in <strong>6 sprints</strong> to move from the Deswik plan to collaborative steering of short-term mine planning.","Built the SharePoint data foundation and Power BI reporting, and defined the governance (operating procedure, RACI, weekly arbitration meeting) taken over by the teams.","The dashboard went from 1–2 readers in the methods office to <strong>about ten engineers</strong> (operations, maintenance, prospecting), available on smartphones in real time. The weekly mine-planning meeting regained attendance.","<strong>Adopted by the Merah mine (MEA) in Khouribga</strong>: handover and adaptation of the dashboard to their context, now part of their weekly meeting."]}}]},
+ {when:{fr:"fév. 2025 – janv. 2026",en:"Feb 2025 – Jan 2026"},title:{fr:"Product Owner & PMO",en:"Product Owner & PMO"},org:{fr:"InnovX",en:"InnovX"},
+  missions:[{cats:["prod","ai","data"],tags:{fr:["Product ownership","ITSM (Freshservice)","SAP-Ariba (P2P)","Chatbot IA","Power BI"],en:["Product ownership","ITSM (Freshservice)","SAP Ariba (P2P)","AI chatbot","Power BI"]},
+    pts:{fr:["Product Owner à 100 % du déploiement de <strong>Freshservice</strong>, outil principal du processus achat : workflows ITSM, go-live puis post-déploiement (~300 demandes/mois, délais −30 %).","Product Owner de fait, côté métier, du <strong>chatbot IA AGIB</strong> : 10 cas d'usage priorisés, 6 livrés, en lien direct avec les développeurs. Après une campagne de communication et un webinaire, <strong>pic à plus de 300 utilisateurs distincts</strong> sur ~500 collaborateurs, et plus de 100 retours utilisateurs analysés en 3 mois.","Interface métier–IT sur l'intégration SAP-Ariba (flux Procure-to-Pay).","Conçu et déployé le <strong>tableau de bord Power BI</strong> de suivi des KPI Achats (15 indicateurs, 30 utilisateurs) : pilotage par l'équipe, partage mensuel au top management d'InnovX en comité."],
+         en:["Full-time Product Owner for the rollout of <strong>Freshservice</strong>, the main tool of the purchasing process: ITSM workflows, go-live then post-deployment (~300 requests a month, lead times down 30%).","De facto Product Owner, business side, of the <strong>AGIB AI chatbot</strong>: 10 prioritised use cases, 6 delivered, working directly with the developers. After a communication campaign and a webinar, <strong>a peak of 300+ distinct users</strong> out of ~500 staff, and 100+ user feedback items analysed in 3 months.","Business–IT interface on the SAP Ariba integration (Procure-to-Pay flows).","Designed and deployed the <strong>Power BI dashboard</strong> tracking Purchasing KPIs (15 indicators, 30 users): used by the team to steer, shared monthly with InnovX top management in committee."]}}]},
+ {when:{fr:"sept. 2022 – janv. 2025",en:"Sep 2022 – Jan 2025"},title:{fr:"Consultant Sénior AMOA",en:"Senior Business Analyst Consultant"},org:{fr:"Inetum Consulting",en:"Inetum Consulting"},
+  missions:[{cats:["prod","data"],tags:{fr:["AMOA","ServiceNow","Spécifications fonctionnelles","Power Apps / Dataverse / Power BI","Benchmark"],en:["Business analysis","ServiceNow","Functional specifications","Power Apps / Dataverse / Power BI","Benchmarking"]},
+    pts:{fr:["<strong>inwi</strong> : conduit la revue des processus de déploiement fibre et sites mobiles et rédigé le cahier des charges de la mise en œuvre de ServiceNow (Field Service Management, interface SAP), à partir d'environ 30 user stories.","<strong>MTNRA</strong> : conçu un tableau de bord pilote de la Stratégie Maroc Digital 2030 (Power Apps, Dataverse, Power BI) pour le top management.","<strong>MTNRA</strong> : élaboré un modèle de maturité digitale des administrations avec benchmark de 3 pays, et l'état des lieux du Maroc sur l'indice EGDI de l'ONU."],
+         en:["<strong>inwi</strong>: led the review of fibre and mobile-site rollout processes and wrote the requirements document for the ServiceNow implementation (Field Service Management, SAP interface), from about 30 user stories.","<strong>MTNRA</strong>: designed a pilot dashboard for the Maroc Digital 2030 strategy (Power Apps, Dataverse, Power BI) for top management.","<strong>MTNRA</strong>: built a digital maturity model for public administrations with a 3-country benchmark, and Morocco's baseline on the UN EGDI index."]}}]},
+ {when:{fr:"mars 2021 – août 2022",en:"Mar 2021 – Aug 2022"},title:{fr:"Consultant en Entrepreneuriat & Développement des Affaires",en:"Entrepreneurship & Business Development Consultant"},org:{fr:"CMEC",en:"CMEC"},
+  missions:[{cats:["pm"],tags:{fr:["Développement commercial","Gestion de portefeuille clients","Pilotage de projet télécom"],en:["Business development","Key account management","Telecom project delivery"]},
+    pts:{fr:["Géré un portefeuille de <strong>20 clients clés</strong> (IAM, inwi, Orange) et piloté la mise en service de <strong>45 sites mobiles</strong> (budget de 1 M€) pour Ittissalat Al Maghrib Bénin."],
+         en:["Managed a portfolio of <strong>20 key accounts</strong> (IAM, inwi, Orange) and led the commissioning of <strong>45 mobile sites</strong> (€1M budget) for Ittissalat Al Maghrib Bénin."]}}]}
+];
+
+var UC={fr:[["Réponses aux demandeurs Achats","Le chatbot répond aux demandeurs sur la base de connaissances Achats, avant qu'ils ne sollicitent l'acheteur. Environ 30 % de charge estimée en moins sur les petits dossiers."],["Pré-remplissage de la demande d'achat","En discutant, le chatbot recueille les premières informations, remplit le formulaire de demande dans Freshservice et déclenche le processus."],["Reporting complémentaire à Power BI","Le chatbot génère un court rapport qui complète la vue Power BI existante."]],
+ en:[["Answers to Purchasing requesters","The chatbot answers requesters from the Purchasing knowledge base before they reach out to a buyer. An estimated ~30% less workload on small files."],["Pre-filled purchase request","Through the conversation, the chatbot gathers the first details, fills in the request form in Freshservice and triggers the process."],["Reporting that complements Power BI","The chatbot generates a short report that complements the existing Power BI view."]]};
+var FACTS={fr:[["6/10","Cas d'usage livrés","Sur 10 priorisés avec les Achats","m"],["300+","Utilisateurs distincts au pic","Sur ~500 collaborateurs, après une campagne de communication et un webinaire","m"],["100+","Retours utilisateurs analysés en 3 mois","Ils ont révélé les limites de la base de connaissances, avant une 2ᵉ vague","m"],["~30 %","De charge en moins sur les petits dossiers","Côté acheteurs","e"]],
+ en:[["6/10","Use cases delivered","Out of 10 prioritised with Purchasing","m"],["300+","Distinct users at peak","Out of ~500 staff, after a communication campaign and a webinar","m"],["100+","User feedback items analysed in 3 months","They exposed the limits of the knowledge base, ahead of a 2nd wave","m"],["~30%","Less workload on small files","Buyers' side","e"]]};
+var STORY={fr:[["Inetum","Le déclic","Première certification interne en IA générative : comprendre comment fonctionne l'IA et comment s'en servir au quotidien."],["2025 · InnovX","Le passage à l'échelle","Le chatbot AGIB : 10 cas d'usage priorisés avec le métier, 6 livrés et utilisés par les Achats."],["2026 · OCP & CalTrack","Le bout en bout","J'apprends à développer avec l'IA : CalTrack de A à Z, puis un jumeau numérique de l'organisation avec assistant IA chez OCP."]],
+ en:[["Inetum","The spark","First internal certification in generative AI: how AI works and how to use it in day-to-day work."],["2025 · InnovX","Scaling up","The AGIB chatbot: 10 use cases prioritised with the business, 6 delivered and used by Purchasing."],["2026 · OCP & CalTrack","End to end","I learn to develop with AI: CalTrack from A to Z, then a digital twin of the organisation with an AI assistant at OCP."]]};
+
+var CT={fr:{tags:["Développement full-stack","GitHub","IA générative","React","Supabase","Vercel","Product design"],
+  shots:[["ct-deficit.jpg","Journal du jour","Saisie en FR, EN ou AR, à la voix","Le déficit du jour, les protéines et les fibres, et la saisie des repas en texte libre ou à la voix, dans trois langues."],
+   ["ct-poids.jpg","Tendance de poids","Moyenne lissée vs plan","Une tendance lissée sur 7 jours, comparée à la pesée du jour et au plan prévisionnel. On lit la direction, pas le bruit."],
+   ["ct-programmes.jpg","Programmes d'entraînement","Adaptés au profil","Trois choix, objectif, niveau et matériel, adaptent les séries, les répétitions et les exercices."],
+   ["ct-priorite.jpg","Ma priorité","Sèche, masse ou équilibre","L'utilisateur choisit sa priorité, l'app recommande et ajuste les conseils avec des aliments d'ici."],
+   ["ct-simulateur.jpg","Simulateur de journée","Composer avant de manger","On compose une journée type, on voit l'apport, la dépense et le déficit, puis on la copie dans son journal."],
+   ["ct-arabe.jpg","Arabe en miroir","Interface de droite à gauche","Toute l'interface bascule en arabe, en miroir, y compris la navigation."]],
+  pts:[["Itérée avec les utilisateurs","Livrée à de premiers utilisateurs, puis améliorée sur leurs retours."],["Trilingue dès le départ","Français, anglais et arabe en miroir, avec un catalogue d'aliments marocains."],["Synchronisée et exportable","Les données sont synchronisées entre appareils et exportables en CSV. Thème clair ou sombre."]]},
+ en:{tags:["Full-stack development","GitHub","Generative AI","React","Supabase","Vercel","Product design"],
+  shots:[["ct-deficit.jpg","Daily log","Input in FR, EN or AR, by voice","The day's deficit, protein and fibre, and meal logging in free text or by voice, in three languages."],
+   ["ct-poids.jpg","Weight trend","Smoothed average vs plan","A 7-day smoothed trend compared with the day's weigh-in and the planned curve. You read the direction, not the noise."],
+   ["ct-programmes.jpg","Training programmes","Adapted to the profile","Three choices, goal, level and equipment, adapt sets, reps and exercises."],
+   ["ct-priorite.jpg","My priority","Cut, bulk or balance","Users pick their priority; the app recommends and tunes the advice around local food."],
+   ["ct-simulateur.jpg","Day simulator","Plan before you eat","Compose a typical day, see intake, expenditure and deficit, then copy it into your log."],
+   ["ct-arabe.jpg","Mirrored Arabic","Right-to-left interface","The whole interface switches to Arabic, mirrored, navigation included."]],
+  pts:[["Iterated with users","Shipped to first users, then improved on their feedback."],["Trilingual from day one","French, English and mirrored Arabic, with a catalogue of Moroccan foods."],["Synced and exportable","Data syncs across devices and exports to CSV. Light or dark theme."]]}};
+
+var PHOTOS=[
+ {src:"img/ph-bateau.jpg",cls:"m-a",fr:"En mer, Indonésie",en:"At sea, Indonesia"},
+ {src:"img/ph-scene.jpg",cls:"m-b",fr:"Sur scène",en:"On stage"},
+ {src:"img/ph-riviere.jpg",cls:"m-c",fr:"Rivière et barques colorées",en:"River and painted boats"},
+ {src:"img/ph-tinabo.jpg",cls:"m-d",fr:"Île de Tinabo, parc national de Taka Bonerate",en:"Tinabo Island, Taka Bonerate National Park"},
+ {src:"img/ph-plage.jpg",cls:"m-e",fr:"Sable blanc et eau turquoise",en:"White sand and turquoise water"},
+ {src:"img/ph-tambour.jpg",cls:"m-f",fr:"Initiation au tambour traditionnel",en:"Learning the traditional drum"},
+ {src:"img/ph-cuisine.jpg",cls:"m-g",fr:"Cuisine locale",en:"Local food"}
+];
+
+var QUOTES=[
+ {ic:"qkey",th:{fr:"Rendre possible",en:"Make it possible"},fr:"Pour ce qui est de l'avenir, il ne s'agit pas de le prévoir, mais de le rendre possible.",en:"As for the future, your task is not to foresee it, but to enable it.",who:{fr:"Antoine de Saint-Exupéry",en:"Antoine de Saint-Exupéry"},src:{fr:"Citadelle",en:"Citadelle"},why:{fr:"La raison d'être d'un Product Owner.",en:"A Product Owner's reason for being."}},
+ {ic:"qppl",th:{fr:"Les gens d'abord",en:"People first"},ar:"الإنسان مدنيّ بالطبع",fr:"L'homme est, par nature, un être social.",en:"Man is, by nature, a social being.",who:{fr:"Ibn Khaldūn",en:"Ibn Khaldūn"},src:{fr:"al-Muqaddima",en:"al-Muqaddima"},why:{fr:"Une organisation, c'est d'abord des gens qui coopèrent. Les outils viennent après.",en:"An organisation is first of all people cooperating. Tools come after."}},
+ {ic:"qcam",th:{fr:"Le regard juste",en:"The right eye"},fr:"Photographier, c'est mettre sur la même ligne de mire la tête, l'œil et le cœur.",en:"To photograph is to put one's head, one's eye and one's heart on the same axis.",who:{fr:"Henri Cartier-Bresson",en:"Henri Cartier-Bresson"},src:{fr:"L'Imaginaire d'après nature",en:"The Mind's Eye"},why:{fr:"Vrai aussi pour un bon cadrage de projet.",en:"True of good project scoping too."}},
+ {ic:"qok",th:{fr:"Le travail bien fait",en:"Work done well"},ar:"إنّ الله يحبّ إذا عمل أحدكم عملاً أن يتقنه",fr:"Dieu aime que, lorsque l'un de vous accomplit un travail, il le fasse avec excellence.",en:"God loves that when one of you does a piece of work, he does it with excellence.",who:{fr:"Hadith du Prophète ﷺ",en:"Hadith of the Prophet ﷺ"},src:{fr:"Rapporté par al-Bayhaqī",en:"Reported by al-Bayhaqī"},why:{fr:"L'itqān, le travail bien fait jusqu'au bout. C'est la barre que je me fixe sur chaque livrable.",en:"Itqān, work done well to the end. It is the bar I set for every deliverable."}}
+];
+var openQ=-1;
+
+var KIT={fr:[["IA",[["Claude","Cowork, Claude Code"],["ChatGPT"],["Microsoft 365 Copilot"]]],["Développement",[["GitHub"],["React"],["Supabase"],["Vercel"],["Python"],["VBA"]]],["Data",[["Power BI","DAX, Power Query"],["Power Apps"],["SharePoint"]]],["Méthodes & autres",[["Lean Six Sigma","DMAIC, VSM, SMED, 5S, Kanban"],["Deswik"],["Miro"],["Lucidchart"]]]],
+ en:[["AI",[["Claude","Cowork, Claude Code"],["ChatGPT"],["Microsoft 365 Copilot"]]],["Development",[["GitHub"],["React"],["Supabase"],["Vercel"],["Python"],["VBA"]]],["Data",[["Power BI","DAX, Power Query"],["Power Apps"],["SharePoint"]]],["Methods & other",[["Lean Six Sigma","DMAIC, VSM, SMED, 5S, Kanban"],["Deswik"],["Miro"],["Lucidchart"]]]]};
+var EDU={fr:{schools:[["2026 – en cours","Programme Beyond","Africa Business School (UM6P), modules certifiants IMD"],["2018 – 2020","Diplôme Grande École, majeure Consulting","Audencia Business School, Nantes"],["2016 – 2018","Diplôme d'Ingénieur Généraliste","École Centrale Casablanca"],["2014 – 2016","Classes préparatoires, Maths & Physique","Ibn Taymia"]],certs:[["Lean Six Sigma","Green Belt"],["IA générative","Niveau 1"]],langs:[["Arabe","Langue maternelle"],["Français","Bilingue"],["Anglais","Bilingue"]]},
+ en:{schools:[["2026 – ongoing","Beyond programme","Africa Business School (UM6P), IMD certified modules"],["2018 – 2020","Grande École degree, Consulting major","Audencia Business School, Nantes"],["2016 – 2018","General Engineering degree","École Centrale Casablanca"],["2014 – 2016","Preparatory classes, Maths & Physics","Ibn Taymia"]],certs:[["Lean Six Sigma","Green Belt"],["Generative AI","Level 1"]],langs:[["Arabic","Native"],["French","Bilingual"],["English","Bilingual"]]}};
+
+var brick="agib",lang="fr",route="accueil",step=0,filter="all",uc=-1,shot=0,qf="all",lbi=0;
+try{var s=localStorage.getItem("he-lang");if(s==="en"||s==="fr")lang=s;}catch(e){}
+function $(id){return document.getElementById(id)}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function t(k){return T[lang][k]}
+function rname(r){return t("r."+r)}
+
+function renderChrome(){
+ document.documentElement.lang=lang;
+ document.querySelectorAll("[data-t]").forEach(function(el){el.textContent=t(el.getAttribute("data-t"))});
+ document.querySelectorAll("[data-h]").forEach(function(el){el.innerHTML=t(el.getAttribute("data-h"))});
+ $("lang-fr").setAttribute("aria-pressed",lang==="fr");$("lang-en").setAttribute("aria-pressed",lang==="en");
+ var pages=ROUTES.slice(1);
+ $("links").innerHTML=pages.map(function(r){return '<a href="#'+r+'"'+(r===route?' aria-current="page"':"")+">"+esc(rname(r))+"</a>"}).join("");
+ $("drawer-links").innerHTML=ROUTES.map(function(r,i){return '<a href="#'+r+'">'+esc(rname(r))+"<span>0"+i+"</span></a>"}).join("");
+ document.querySelectorAll("[data-pager]").forEach(function(el){
+  var i=pages.indexOf(route);if(i<0){el.innerHTML="";return}
+  var p=pages[i-1],n=pages[i+1];
+  el.innerHTML=(p?'<a href="#'+p+'"><span>← '+esc(t("prev"))+"</span><b>"+esc(rname(p))+"</b></a>":'<a href="#accueil"><span>← '+esc(t("menu"))+"</span><b>"+esc(rname("accueil"))+"</b></a>")+
+   (n?'<a class="next" href="#'+n+'"><span>'+esc(t("next"))+" →</span><b>"+esc(rname(n))+"</b></a>":'<a class="next" href="#accueil"><span>'+esc(t("menu"))+" →</span><b>"+esc(rname("accueil"))+"</b></a>");
+ });
+}
+function renderHome(){
+ $("stats").innerHTML=STATS[lang].map(function(s,i){return '<button class="stat" id="st-k'+i+'" data-st="'+i+'" aria-expanded="'+(openSt===i)+'"><b>'+s[0]+(s[1]?"<small>"+s[1]+"</small>":"")+'</b><span>'+esc(s[2])+'</span><i class="more">'+(lang==="fr"?"Détail":"Details")+' <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5L5 6.5 8 3.5"/></svg></i></button>'}).join("")+'<div class="bubble up" id="stpop" hidden></div>';
+ placeSt();
+ var R=ROOMS[lang];
+ function room(r,i,cls,inner){return '<a class="room '+cls+'" href="#'+r+'"><span class="num mono">0'+i+'</span><span class="go">'+ARROW+"</span>"+(inner||"")+"<h3>"+esc(rname(r))+"</h3><p>"+esc(R[r])+"</p></a>"}
+ $("rooms-pro").innerHTML=
+  room("parcours",1,"wide dark")+
+  room("competences",2,"")+
+  room("methode",3,"")+
+  room("ia",4,"wide img",'<img src="img/ct-deficit.jpg" alt="" loading="lazy">')+
+  room("contact",5,"full dark");
+ $("rooms-beyond").innerHTML=
+  room("voyages",6,"wide img",'<img src="img/ph-bateau.jpg" alt="" loading="lazy">')+
+  room("citations",7,"quote-room",'<blockquote lang="ar">الإنسان مدنيّ بالطبع</blockquote>');
+}
+function placeSt(){
+ var pop=$("stpop");if(!pop)return;if(openSt<0){pop.hidden=true;return}
+ var s=STATS[lang][openSt];
+ pop.innerHTML='<button class="x" id="st-x" aria-label="Fermer"><svg width="12" height="12" viewBox="0 0 14 14" stroke="currentColor" stroke-width="1.8"><path d="M2 2l10 10M12 2L2 12"/></svg></button><h4>'+s[0]+s[1]+" "+esc(s[2])+'</h4><p>'+esc(s[3])+'</p><ul class="stlist">'+s[4].map(function(x){return "<li><b>"+esc(x[0])+"</b><span>"+esc(x[1])+"</span></li>"}).join("")+"</ul>";
+ pop.hidden=false;
+ if(window.matchMedia("(max-width:600px)").matches){pop.style.left="";pop.style.top="";return}
+ var tile=$("st-k"+openSt),wrap=$("stats");var tr=tile.getBoundingClientRect(),wr=wrap.getBoundingClientRect();
+ var bw=pop.offsetWidth,bh=pop.offsetHeight;var left=tr.left-wr.left+20;left=Math.max(0,Math.min(left,wr.width-bw));
+ pop.style.left=left+"px";pop.style.top=(tr.top-wr.top-bh-10)+"px";
+ pop.style.setProperty("--ax",Math.max(16,Math.min(bw-30,tr.left-wr.left+40-left))+"px");
+}
+window.addEventListener("resize",function(){if(openSt>=0)placeSt()});
+function renderMethod(){
+ $("flowline").innerHTML=STEPS[lang].map(function(s,i){return '<button role="tab" id="st-'+i+'" data-step="'+i+'" aria-selected="'+(i===step)+'"><span class="node">0'+(i+1)+'</span><span class="name">'+esc(s.t)+"</span></button>"}).join("");
+ var s=STEPS[lang][step];
+ $("panel").innerHTML="<h3>"+esc(s.h)+'</h3><p class="what">'+esc(s.w)+'</p><div class="proof"><span class="mono">'+esc(t("proof"))+"</span><p>"+esc(s.p)+'</p><p class="where">'+esc(s.o)+"</p></div>";
+}
+function renderPath(){
+ var chips=[["all",t("all")]].concat(Object.keys(CATS).map(function(k){return [k,CATS[k][lang]]}));
+ $("filters").innerHTML=chips.map(function(c){return '<button class="chip" id="chip-'+c[0]+'" data-filter="'+c[0]+'" aria-pressed="'+(filter===c[0])+'">'+esc(c[1])+"</button>"}).join("");
+ var MID=[["m-ocp2","m-ocp1"],["m-innovx"],["m-inetum"],["m-cmec"]];
+ $("tl").innerHTML=JOBS.map(function(j,jk){var any=false;
+  var ms=j.missions.map(function(m,mk){var hit=filter==="all"||m.cats.indexOf(filter)>-1;if(hit)any=true;
+   return '<div id="'+MID[jk][mk]+'" class="mission'+(filter!=="all"?(hit?" hit":" dim"):"")+'">'+(m.name?"<h4>"+esc(m.name[lang])+"<span>"+esc(m.when[lang])+"</span></h4>":"")+'<div class="tags">'+m.tags[lang].map(function(x){return "<span>"+esc(x)+"</span>"}).join("")+'</div><ul class="pts">'+m.pts[lang].map(function(x){return "<li>"+x+"</li>"}).join("")+"</ul></div>"}).join("");
+  return '<article class="job'+(any?"":" dim")+'"><div class="when">'+(j.now?"<b>"+(lang==="fr"?"En cours":"Current")+"</b>":"")+esc(j.when[lang])+'</div><div class="body"><div><h3>'+esc(j.title[lang])+'</h3><p class="org">'+esc(j.org[lang])+"</p></div>"+ms+"</div></article>"}).join("");
+}
+function renderAI(){
+ var h="";for(var i=0;i<10;i++){h+='<button class="uc'+(i<6?" done":"")+(i<3?" named":"")+'" id="uc-'+i+'" data-uc="'+i+'" aria-pressed="'+(uc===i)+'">'+(i<9?"0":"")+(i+1)+"</button>"}
+ $("grid10").innerHTML=h;
+ var b,s;if(uc<0){b=t("ai.default.b");s=t("ai.default.s")}else if(uc<3){b=UC[lang][uc][0];s=UC[lang][uc][1]}else if(uc<6){b=t("ai.done");s=t("ai.done.s")}else{b=t("ai.not");s=t("ai.not.s")}
+ $("caption").innerHTML="<b>"+esc(b)+"</b><span>"+esc(s)+"</span>";
+ $("facts").innerHTML=FACTS[lang].map(function(f){return "<div><b>"+esc(f[0])+"</b><span>"+esc(f[1])+' <i class="ftag '+f[3]+'">'+esc(t(f[3]==="m"?"fact.lbl.m":"fact.lbl.e"))+"</i><em>"+esc(f[2])+"</em></span></div>"}).join("");
+ var B=BA[lang];
+ function col(c,cls){return '<div class="'+cls+'"><p class="mono">'+esc(c.t)+'</p><h4>'+esc(c.h)+'</h4><ol class="steps-row" style="list-style:none;margin:0;padding:0">'+c.s.map(function(x,i){return '<li'+(cls==="after"&&i===1?' class="hl"':'')+'><i>'+(i+1)+'</i><div><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></div></li>'}).join("")+'</ol><p class="out">'+esc(c.o)+'</p></div>'}
+ $("ba").innerHTML=col(B.b,"before")+col(B.a,"after");
+ $("gains").innerHTML=GAINS[lang].map(function(g){return "<div><h4>"+esc(g[0])+"</h4><p>"+esc(g[1])+"</p></div>"}).join("");
+ var L=LEARNED[lang];$("learned").innerHTML='<span class="l">'+esc(L[0])+"</span>"+L.slice(1).map(function(x){return "<b>"+esc(x)+"</b>"}).join("");
+ if($("story"))$("story").innerHTML=STORY[lang].map(function(s){return '<div><span class="mono">'+esc(s[0])+"</span><h4>"+esc(s[1])+"</h4><p>"+esc(s[2])+"</p></div>"}).join("");
+}
+function renderCT(){
+ var c=CT[lang];
+ $("ct-tags").innerHTML=c.tags.map(function(x){return "<span>"+esc(x)+"</span>"}).join("");
+ $("vlist").innerHTML=c.shots.map(function(s,i){return '<button role="tab" id="sh-'+i+'" data-shot="'+i+'" aria-selected="'+(i===shot)+'"><b>'+esc(s[1])+"</b><span>"+esc(s[2])+"</span></button>"}).join("");
+ var s=c.shots[shot];var blurred=shot<2||shot===4;
+ $("vshot").innerHTML='<div class="shot"><img src="img/'+s[0]+'" alt="'+esc(s[1])+'"></div><p>'+esc(s[3])+"</p>"+(blurred?'<span class="blurnote">'+esc(t("ct.blur"))+"</span>":"");
+ $("ct-points").innerHTML=c.pts.map(function(p){return "<div><h4>"+esc(p[0])+"</h4><p>"+esc(p[1])+"</p></div>"}).join("");
+}
+function renderTrips(){
+ $("mosaic").innerHTML=PHOTOS.map(function(p,i){return '<button class="'+p.cls+'" data-photo="'+i+'" aria-label="'+esc(p[lang])+'"><img src="'+p.src+'" alt="'+esc(p[lang])+'" loading="lazy"><figcaption>'+esc(p[lang])+"</figcaption></button>"}).join("");
+}
+function renderQuotes(){
+ var fr=lang==="fr";
+ $("quotes").innerHTML=QUOTES.map(function(q,i){return '<button class="tile soft" id="qt-'+i+'" data-q="'+i+'" aria-expanded="'+(openQ===i)+'" aria-controls="qbub"><span class="ill">'+svg(q.ic,30)+'</span><span><b>'+esc(q.th[lang])+'</b><small>'+esc(q.who[lang])+'</small></span></button>'}).join("");
+ placeQ();
+}
+function placeQ(){
+ var bub=$("qbub");$("qwrap").style.paddingBottom="";if(openQ<0){bub.hidden=true;return}
+ var q=QUOTES[openQ];
+ bub.innerHTML='<button class="x" id="qb-x" aria-label="Fermer"><svg width="12" height="12" viewBox="0 0 14 14" stroke="currentColor" stroke-width="1.8"><path d="M2 2l10 10M12 2L2 12"/></svg></button>'+(q.ar?'<p class="qar" lang="ar">'+esc(q.ar)+'</p>':'')+'<h4 class="qtx">'+(lang==="fr"?'« ':'“')+esc(q[lang])+(lang==="fr"?' »':'”')+'</h4><p>'+esc(q.why[lang])+'</p><p class="qwho"><b>'+esc(q.who[lang])+'</b> · '+esc(q.src[lang])+'</p>';
+ bub.hidden=false;
+ var tile=$("qt-"+openQ),wrap=$("qwrap");
+ if(window.matchMedia("(max-width:600px)").matches){bub.style.left="";bub.style.top="";return}
+ var tr=tile.getBoundingClientRect(),wr=wrap.getBoundingClientRect();
+ var bw=bub.offsetWidth;var left=tr.left-wr.left+tr.width/2-bw/2;left=Math.max(0,Math.min(left,wr.width-bw));
+ bub.style.left=left+"px";bub.style.top=(tr.bottom-wr.top+12)+"px";
+ bub.style.setProperty("--ax",Math.max(16,Math.min(bw-30,tr.left-wr.left+tr.width/2-left-7))+"px");
+ wrap.style.paddingBottom=(bub.offsetHeight+24)+"px";
+}
+window.addEventListener("resize",function(){if(openQ>=0)placeQ()});
+function renderKit(){
+ $("kit").innerHTML=KIT[lang].map(function(g){return "<div><h3>"+esc(g[0])+"</h3><ul>"+g[1].map(function(x){return "<li>"+esc(x[0])+(x[1]?"<small>"+esc(x[1])+"</small>":"")+"</li>"}).join("")+"</ul></div>"}).join("");
+ var e=EDU[lang];
+ $("schools").innerHTML=e.schools.map(function(x){return '<div class="school"><span class="mono">'+esc(x[0])+"</span><div><b>"+esc(x[1])+"</b><span>"+esc(x[2])+"</span></div></div>"}).join("");
+ function li(a){return a.map(function(x){return '<li><b style="font-weight:500">'+esc(x[0])+"</b><span>"+esc(x[1])+"</span></li>"}).join("")}
+ $("side").innerHTML="<h3>"+esc(t("certs"))+"</h3><ul>"+li(e.certs)+"</ul><h3>"+esc(t("langs"))+"</h3><ul>"+li(e.langs)+"</ul>";
+}
+var ICON={"model":"<ellipse cx=\"12\" cy=\"5\" rx=\"8\" ry=\"3\"/><path d=\"M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6\"/>","bench":"<path d=\"M4 20V9l8-5 8 5v11M9 20v-6h6v6\"/><path d=\"M2 20h20\"/>","synth":"<path d=\"M4 5h16M7 10h10M10 15h4M12 15v5\"/>","po": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3\"/><path d=\"M8 9h8M8 13h5M8 17h3\"/>", "spec": "<path d=\"M7 3h7l4 4v14H7z\"/><path d=\"M14 3v4h4M10 12h5M10 16h5\"/>", "flow": "<rect x=\"3\" y=\"4\" width=\"6\" height=\"5\" rx=\"1.5\"/><rect x=\"15\" y=\"4\" width=\"6\" height=\"5\" rx=\"1.5\"/><rect x=\"9\" y=\"15\" width=\"6\" height=\"5\" rx=\"1.5\"/><path d=\"M9 6.5h6M6 9v3h12V9M12 12v3\"/>", "org": "<circle cx=\"12\" cy=\"5\" r=\"2.5\"/><circle cx=\"5\" cy=\"18\" r=\"2.5\"/><circle cx=\"12\" cy=\"18\" r=\"2.5\"/><circle cx=\"19\" cy=\"18\" r=\"2.5\"/><path d=\"M12 7.5v8M5 15.5V12h14v3.5\"/>", "bi": "<path d=\"M4 20V10M10 20V4M16 20v-7M22 20H2\"/>", "ai": "<path d=\"M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z\"/><path d=\"M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z\"/>", "code": "<path d=\"M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16\"/>", "agile": "<path d=\"M20 12a8 8 0 1 1-2.3-5.6\"/><path d=\"M20 4v4h-4\"/><path d=\"M9 12l2 2 4-4\"/>", "plug": "<path d=\"M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4\"/>", "lean": "<circle cx=\"12\" cy=\"12\" r=\"8\"/><circle cx=\"12\" cy=\"12\" r=\"4\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/>", "work": "<circle cx=\"7\" cy=\"8\" r=\"2.5\"/><circle cx=\"17\" cy=\"8\" r=\"2.5\"/><circle cx=\"12\" cy=\"6\" r=\"2.5\"/><path d=\"M3 18c0-3 2-5 4-5M21 18c0-3-2-5-4-5M8 19c0-3 1.8-5 4-5s4 2 4 5\"/>", "bridge": "<path d=\"M2 17h20M5 17V9M19 17V9M5 9c3 4 11 4 14 0M9 17v-4M15 17v-4\"/>", "present": "<rect x=\"3\" y=\"4\" width=\"18\" height=\"12\" rx=\"2\"/><path d=\"M12 16v4M8 20h8M7 12l3-3 2 2 4-4\"/>", "pair": "<circle cx=\"8\" cy=\"8\" r=\"3\"/><circle cx=\"16\" cy=\"8\" r=\"3\"/><path d=\"M3 20c0-3.5 2.2-6 5-6s5 2.5 5 6M11 20c0-3.5 2.2-6 5-6s5 2.5 5 6\"/>", "scale": "<path d=\"M12 3v18M7 21h10M5 7h14M5 7l-3 7h6zM19 7l-3 7h6z\"/>", "learn": "<path d=\"M2 9l10-5 10 5-10 5z\"/><path d=\"M6 11v5c3 2 9 2 12 0v-5M22 9v6\"/>", "globe": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18\"/>", "hand": "<path d=\"M3 12l4-4 4 2 3-2 7 6-3 3-3-2-2 2-3-2-2 1z\"/>"};
+var DEST={"p-":["brief"],"agib":["ai"],"caltrack":["code"],"prototype":["flow"],"p-formation":["learn"],"voyages":["globe"]};
+ICON.brief='<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/>';
+ICON.qkey='<path d="M5 19L19 5M19 5h-7M19 5v7"/><circle cx="6" cy="18" r="2"/>';
+ICON.qppl='<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c3 0 6 1.5 6 5.5"/>';
+ICON.qcam='<rect x="3" y="7" width="18" height="13" rx="3"/><circle cx="12" cy="13.5" r="3.5"/><path d="M8.5 7l1.5-3h4l1.5 3"/>';
+ICON.qok='<circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/>';
+function destIcon(h){if(DEST[h])return DEST[h][0];if(h.indexOf("p-")===0)return "brief";return "brief"}
+var SK={hard:[
+ ["po","Product ownership","Product ownership","Backlog, user stories, go-live et suivi post-déploiement d'un outil métier.","Backlog, user stories, go-live and post-deployment follow-up of a business tool.",[["p-innovx","Freshservice · InnovX","Freshservice · InnovX"],["caltrack","CalTrack","CalTrack"]]],
+ ["spec","AMOA & intégration SI","Business analysis & IT integration","Recueil du besoin, cahier des charges, interfaces SAP, ServiceNow, SAP-Ariba.","Requirements, specification documents, SAP interfaces, ServiceNow, SAP Ariba.",[["p-inetum","ServiceNow · inwi","ServiceNow · inwi"],["p-innovx","SAP-Ariba · InnovX","SAP Ariba · InnovX"]]],
+ ["flow","Processus & RACI","Process & RACI","Étapes, rôles, points de décision, mode opératoire.","Steps, roles, decision points, operating procedure.",[["p-ocp2","Organizing · OCP","Organizing · OCP"],["p-ocp1","STMP · OCP","STMP · OCP"]]],
+ ["org","Operating model","Operating model","Ce qui reste au corporate, ce qui va aux entités, comment on mobilise l'expertise.","What stays at corporate, what goes to the units, how expertise is mobilised.",[["p-ocp2","Expertises du Groupe · OCP","Group expertise · OCP"]]],
+ ["bi","Data & BI","Data & BI","Power BI, DAX, SharePoint, Power Apps, modélisation de données.","Power BI, DAX, SharePoint, Power Apps, data modelling.",[["p-innovx","KPI Achats · InnovX","Purchasing KPIs · InnovX"],["p-ocp1","Dashboard repris par la mine de Merah","Dashboard adopted by Merah mine"]]],
+ ["ai","IA générative","Generative AI","Cadrer des cas d'usage IA avec le métier, les prioriser, les livrer.","Scope AI use cases with the business, prioritise them, deliver them.",[["agib","Chatbot AGIB","AGIB chatbot"],["p-ocp2","Jumeau numérique","Digital twin"]]],
+ ["code","Dév full-stack","Full-stack dev","React, Supabase, Vercel, GitHub, appris en construisant avec l'IA.","React, Supabase, Vercel, GitHub, learned by building with AI.",[["caltrack","CalTrack","CalTrack"],["prototype","Étape Prototype","Prototype step"]]],
+ ["agile","Agile & PMO","Agile & PMO","Sprints, comitologie, suivi de déploiement. Lean Six Sigma Green Belt.","Sprints, governance forums, rollout tracking. Lean Six Sigma Green Belt.",[["p-ocp1","6 sprints · STMP","6 sprints · STMP"],["p-cmec","45 sites · CMEC","45 sites · CMEC"]]]
+],soft:[
+ ["work","Animation d'ateliers","Workshop facilitation","Faire émerger le vrai besoin avec le métier, puis le prioriser.","Bring out the real need with the business, then prioritise it.",[["agib","10 cas d'usage · AGIB","10 use cases · AGIB"],["p-inetum","Revue des processus · inwi","Process review · inwi"],["p-innovx","Webinaire AGIB · 300+ utilisateurs","AGIB webinar · 300+ users"]]],
+ ["bridge","Pont métier – IT","Business–IT bridge","Parler aux deux, et faire que chacun comprenne l'autre.","Speak to both, and make each understand the other.",[["p-innovx","Interface métier–IT · InnovX","Business–IT interface · InnovX"],["prototype","Prototyper pour aligner","Prototype to align"]]],
+ ["present","Parler au top management","Talking to top management","Synthétiser, chiffrer, présenter en comité.","Summarise, quantify, present in committee.",[["p-innovx","Comité mensuel · InnovX","Monthly committee · InnovX"],["p-inetum","Maroc Digital 2030","Maroc Digital 2030"]]],
+ ["scale","Arbitrer & prioriser","Trade-offs & priorities","Choisir ce qui compte, et assumer ce qui attend.","Choose what matters, and own what waits.",[["agib","6 sur 10 livrés · AGIB","6 of 10 delivered · AGIB"],["p-ocp1","Arbitrage hebdo · OCP","Weekly arbitration · OCP"]]],
+ ["learn","Apprendre vite","Learning fast","Aller chercher la compétence qui manque, et la mettre en pratique.","Go get the missing skill, and put it into practice.",[["caltrack","Le dev appris avec l'IA","Development learned with AI"]]],
+ ["globe","Ouverture interculturelle","Cross-cultural openness","Trilingue, projets au Bénin, immersion en Indonésie.","Trilingual, projects in Benin, immersion in Indonesia.",[["p-cmec","Bénin · CMEC","Benin · CMEC"],["voyages","Voyages","Travel"]]]
+]};
+var openSk=null;
+function svg(k,sz){sz=sz||26;return '<svg width="'+sz+'" height="'+sz+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+ICON[k]+'</svg>'}
+function renderSkills(){
+ var fr=lang==="fr";
+ ["hard","soft"].forEach(function(g){
+  $("tiles-"+g).innerHTML=SK[g].map(function(k,i){var id=g+"-"+i;var n=k[5].length;
+   return '<button class="tile '+g+'" id="tile-'+id+'" data-sk="'+id+'" aria-expanded="'+(openSk===id)+'" aria-controls="bubble"><span class="ill">'+svg(k[0],30)+'</span><span><b>'+esc(fr?k[1]:k[2])+'</b><small>'+n+' '+(fr?(n>1?"exemples":"exemple"):(n>1?"examples":"example"))+'</small></span></button>'}).join("");
+ });
+ placeBubble();
+}
+function placeBubble(){
+ var bub=$("bubble");if(!openSk){bub.hidden=true;return}
+ var g=openSk.split("-")[0],i=+openSk.split("-")[1],k=SK[g][i],fr=lang==="fr";
+ bub.innerHTML='<button class="x" id="bub-x" aria-label="Fermer"><svg width="12" height="12" viewBox="0 0 14 14" stroke="currentColor" stroke-width="1.8"><path d="M2 2l10 10M12 2L2 12"/></svg></button><h4>'+esc(fr?k[1]:k[2])+'</h4><p>'+esc(fr?k[3]:k[4])+'</p><div class="go-row">'+k[5].map(function(pr){return '<a href="#'+pr[0]+'"><i>'+svg(destIcon(pr[0]),16)+'</i>'+esc(fr?pr[1]:pr[2])+'</a>'}).join("")+'</div>';
+ bub.hidden=false;
+ var tile=$("tile-"+openSk),wrap=$("skwrap");
+ if(window.matchMedia("(max-width:600px)").matches){bub.style.left="";bub.style.top="";return}
+ var tr=tile.getBoundingClientRect(),wr=wrap.getBoundingClientRect();
+ var bw=bub.offsetWidth;var left=tr.left-wr.left+tr.width/2-bw/2;left=Math.max(0,Math.min(left,wr.width-bw));
+ bub.style.left=left+"px";bub.style.top=(tr.bottom-wr.top+12)+"px";
+ bub.style.setProperty("--ax",Math.max(16,Math.min(bw-30,tr.left-wr.left+tr.width/2-left-7))+"px");
+}
+window.addEventListener("resize",function(){if(openSk)placeBubble()});
+function renderBricks(){
+ $("bricks").innerHTML=[["agib","01","b1"],["caltrack","02","b2"]].map(function(x){return '<button role="tab" id="bk-'+x[0]+'" data-brick="'+x[0]+'" aria-selected="'+(brick===x[0])+'" aria-controls="brick-'+x[0]+'"><span class="bn">'+x[1]+'</span><span><b>'+esc(t(x[2]+".t"))+'</b><span class="s">'+esc(t(x[2]+".s"))+'</span></span><span class="tag">'+esc(t(x[2]+".tag"))+'</span></button>'}).join("");
+ $("brick-agib").hidden=brick!=="agib";$("brick-caltrack").hidden=brick!=="caltrack";
+}
+function renderAll(){renderSkills();renderBricks();renderChrome();renderHome();renderMethod();renderPath();renderAI();renderCT();renderTrips();renderQuotes();renderKit()}
+
+function show(r,scroll){
+ var target=null;if(ALIAS[r]){target=ALIAS[r][1];r=ALIAS[r][0];if(target==="agib"||target==="caltrack"){brick=target;target="bricks";renderBricks()}if(target&&target.indexOf("m-")===0&&filter!=="all"){filter="all";renderPath()}}
+ if(ROUTES.indexOf(r)<0)r="accueil";route=r;
+ document.querySelectorAll(".route").forEach(function(el){var on=el.getAttribute("data-route")===r;el.hidden=!on;if(on){el.classList.remove("fade");void el.offsetWidth;el.classList.add("fade")}});
+ openSk=null;openSt=-1;if($("bubble"))$("bubble").hidden=true;if($("stpop"))$("stpop").hidden=true;renderChrome();closeDrawer();
+ if(target){var te=$(target);if(te)setTimeout(function(){window.scrollTo(0,te.getBoundingClientRect().top+window.pageYOffset-80);if(te.classList.contains("mission")){te.classList.remove("flash");void te.offsetWidth;te.classList.add("flash")}},30)}
+ else if(scroll!==false)window.scrollTo(0,0);
+ document.title=r==="accueil"?"Hamza Elgoudany":rname(r)+" · Hamza Elgoudany";
+}
+function fromHash(){var h=(location.hash||"").replace("#","");show(h||"accueil")}
+window.addEventListener("hashchange",fromHash);
+document.addEventListener("click",function(ev){var a=ev.target.closest('a[href^="#"]');if(a&&a.getAttribute("href")===location.hash){setTimeout(fromHash,0)}});
+
+function openDrawer(){$("drawer").hidden=false;$("menu-btn").setAttribute("aria-expanded","true");$("drawer-x").focus()}
+function closeDrawer(){if(!$("drawer").hidden){$("drawer").hidden=true;$("menu-btn").setAttribute("aria-expanded","false")}}
+function openLB(i){lbi=(i+PHOTOS.length)%PHOTOS.length;var p=PHOTOS[lbi];$("lb-img").src=p.src;$("lb-img").alt=p[lang];$("lb-cap").textContent=p[lang];$("lb-count").textContent=(lbi+1)+" / "+PHOTOS.length;$("lb").hidden=false;$("lb-close").focus()}
+function closeLB(){$("lb").hidden=true;var b=document.querySelector('[data-photo="'+lbi+'"]');if(b)b.focus()}
+
+document.addEventListener("click",function(ev){
+ var el=ev.target.closest("[data-st],#st-x,[data-sk],#bub-x,[data-brick],[data-lang],[data-step],[data-filter],[data-uc],[data-shot],[data-q],#qb-x,[data-photo],#copy,#menu-btn,#drawer-x,#lb-close,#lb-prev,#lb-next");
+ if(!el){if(ev.target.id==="lb")closeLB();if(openSk&&!ev.target.closest("#bubble")){openSk=null;renderSkills()}if(openQ>=0&&!ev.target.closest("#qbub")){openQ=-1;renderQuotes()}if(openSt>=0&&!ev.target.closest("#stpop")){openSt=-1;renderHome()}return}
+ if(el.hasAttribute("data-st")){var n2=+el.getAttribute("data-st");openSt=(openSt===n2?-1:n2);renderHome();$("st-k"+n2).focus();return}
+ if(el.id==="st-x"){var o2=openSt;openSt=-1;renderHome();if(o2>=0)$("st-k"+o2).focus();return}
+ if(el.hasAttribute("data-sk")){var id=el.getAttribute("data-sk");openSk=(openSk===id?null:id);renderSkills();$("tile-"+id).focus();return}
+ if(el.id==="bub-x"){var o=openSk;openSk=null;renderSkills();if(o)$("tile-"+o).focus();return}
+ if(el.hasAttribute("data-brick")){brick=el.getAttribute("data-brick");renderBricks();$("bk-"+brick).focus();return}
+ if(el.hasAttribute("data-lang")){lang=el.getAttribute("data-lang");try{localStorage.setItem("he-lang",lang)}catch(e){}renderAll();return}
+ if(el.hasAttribute("data-step")){step=+el.getAttribute("data-step");renderMethod();$("st-"+step).focus();return}
+ if(el.hasAttribute("data-filter")){filter=el.getAttribute("data-filter");renderPath();$("chip-"+filter).focus();return}
+ if(el.hasAttribute("data-uc")){var n=+el.getAttribute("data-uc");uc=(uc===n?-1:n);renderAI();$("uc-"+n).focus();return}
+ if(el.hasAttribute("data-shot")){shot=+el.getAttribute("data-shot");renderCT();$("sh-"+shot).focus();return}
+ if(el.hasAttribute("data-q")){var nq=+el.getAttribute("data-q");openQ=(openQ===nq?-1:nq);renderQuotes();$("qt-"+nq).focus();return}
+ if(el.id==="qb-x"){var oq=openQ;openQ=-1;renderQuotes();if(oq>=0)$("qt-"+oq).focus();return}
+ if(el.hasAttribute("data-photo")){openLB(+el.getAttribute("data-photo"));return}
+ if(el.id==="menu-btn"){openDrawer();return}
+ if(el.id==="drawer-x"){closeDrawer();$("menu-btn").focus();return}
+ if(el.id==="lb-close"){closeLB();return}
+ if(el.id==="lb-prev"){openLB(lbi-1);return}
+ if(el.id==="lb-next"){openLB(lbi+1);return}
+ if(el.id==="copy"){var done=function(){el.textContent=t("contact.copied");setTimeout(function(){el.textContent=t("contact.copy")},1600)};
+  var sel=function(){var r=document.createRange();r.selectNodeContents($("email"));var s=window.getSelection();s.removeAllRanges();s.addRange(r)};
+  try{navigator.clipboard.writeText($("email").textContent).then(done,sel)}catch(e){sel()}}
+});
+document.addEventListener("keydown",function(ev){
+ if(!$("lb").hidden){if(ev.key==="Escape")closeLB();if(ev.key==="ArrowRight")openLB(lbi+1);if(ev.key==="ArrowLeft")openLB(lbi-1);return}
+ if(openSt>=0&&ev.key==="Escape"){var o3=openSt;openSt=-1;renderHome();$("st-k"+o3).focus();return}
+ if(openQ>=0&&ev.key==="Escape"){var oq2=openQ;openQ=-1;renderQuotes();$("qt-"+oq2).focus();return}
+ if(openSk&&ev.key==="Escape"){var o=openSk;openSk=null;renderSkills();$("tile-"+o).focus();return}
+ if(!$("drawer").hidden&&ev.key==="Escape"){closeDrawer();$("menu-btn").focus()}
+});
+
+renderAll();fromHash();
+var DL=null;
+fetch("cv.pdf",{method:"HEAD"}).then(function(r){if(!r.ok)return;var c=r.headers.get("content-type")||"";if(c.indexOf("pdf")<0)return;
+ if(window.claude&&window.claude.use){window.claude.use("downloads").then(function(d){if(!d)return;DL=d;document.querySelectorAll("[data-cv]").forEach(function(b){b.hidden=false})}).catch(function(){})}
+}).catch(function(){});
+document.addEventListener("click",function(ev){var b=ev.target.closest("[data-cv]");if(!b||!DL)return;
+ fetch("cv.pdf").then(function(r){return r.blob()}).then(function(bl){return DL.save({filename:"CV_Hamza_Elgoudany_2026.pdf",data:bl})}).catch(function(e){if(e&&e.code==="declined")return;var sp=b.querySelector("span");var o=sp.textContent;sp.textContent=t("cv.no");setTimeout(function(){sp.textContent=o},2200)});
+});
+})();
+</script>
+
+</body></html>
