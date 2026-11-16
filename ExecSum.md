@@ -5,7 +5,7 @@ Site portfolio statique bilingue (FR/EN), sans build, issu d'un artefact Claude.
 
 ## Où
 - Dépôt : https://github.com/Elgoudany/portfolio (public, branche `main`)
-- Site : https://elgoudany.github.io/portfolio/
+- Site (production) : https://www.hamzaelgoudany.com (GitHub Pages, domaine perso ; DNS chez Namecheap ; fichier `CNAME` = `www.hamzaelgoudany.com`)
 - Déploiement : GitHub Pages, auto à chaque push sur `main` (`.github/workflows/pages.yml`).
 
 ## Fichiers
@@ -22,11 +22,14 @@ Site portfolio statique bilingue (FR/EN), sans build, issu d'un artefact Claude.
 4. Bouton d'installation ajouté.
 5. Bug corrigé : le `<link rel="manifest">` était dans le `<body>`, donc Chrome l'ignorait. Déplacé dans le `<head>` (installabilité validée en local, aucune erreur).
 
+## SEO
+`index.html` : canonical, meta description, Open Graph, Twitter, JSON-LD `Person` (pays seulement : aucune ville dans le site). `sitemap.xml`, `robots.txt`. Cache du service worker : `v2`.
+
 ## État / à vérifier
 - Après le dernier push, vérifier sur le site en ligne que « Install page as app » (menu ⋮ > Cast, save, and share) et le bouton fonctionnent. Vider le service worker (F12 > Application > Unregister) + Ctrl+Shift+R si cache ancien.
 - Le Chrome de l'utilisateur est géré par une organisation (innovx.ma) : l'installation peut être bloquée par politique. Alternative : Edge / profil perso / Android.
-- Lien vers `hamzaelgoudany.com` en bas de page : jamais vérifié (fichier source tronqué à cet endroit).
-- Chemins relatifs (`img/...`) : le site fonctionne sous `/portfolio/`.
+- Lien `www.hamzaelgoudany.com` en bas de page : correct (domaine de production).
+- Chemins relatifs (`img/...`) : conservés ; le site est servi à la racine du domaine.
 
 ## Pistes
-- Lien CV simple, domaine perso, vérifier le rendu mobile réel.
+- Lien CV simple, vérifier le rendu mobile réel, soumettre `sitemap.xml` à Google Search Console.
